@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monsey Trails | AI Lost & Found — Photo Recognition Trial</title>
+<style>
+:root{--ink:#15243b;--muted:#677990;--navy:#152944;--navy2:#20395d;--blue:#286ce3;--canvas:#f3f6fb;--line:#e1e8f1;--shadow:0 10px 34px rgba(27,57,96,.065);font-family:"Segoe UI",Arial,sans-serif}*{box-sizing:border-box}html,body{margin:0;min-height:100%;color:var(--ink);background:var(--canvas)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #9dc0ff;outline-offset:2px}a{color:inherit;text-decoration:none}.shell{min-height:100vh;display:grid;grid-template-columns:248px 1fr}.sidebar{background:linear-gradient(165deg,#192f4e,#12253d);color:#d8e4f4;padding:29px 17px;min-height:100vh;display:flex;flex-direction:column;gap:32px}.logo{display:flex;align-items:center;gap:12px;padding:0 13px}.mark{background:#fff;color:#163963;font-weight:900;letter-spacing:-1px;border-radius:13px;width:45px;height:45px;display:grid;place-items:center;font-size:17px}.brand{font-size:18px;font-weight:800;color:#fff;line-height:1.18}.brand small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:650;color:#aec3dd;margin-top:5px}.sidebar-label{font-size:10px;letter-spacing:.16em;font-weight:800;color:#809cbf;text-transform:uppercase;padding:0 14px;margin-bottom:12px}.nav{display:flex;flex-direction:column;gap:7px}.navbtn{width:100%;border:0;border-radius:11px;padding:14px 14px;display:flex;align-items:center;gap:12px;color:#c8d7e9;background:transparent;text-align:left;font-weight:650;font-size:14px}.navbtn:hover{background:#284366}.navbtn.active{background:#3562a8;color:#fff;box-shadow:inset 3px 0 #7fb2ff}.navbtn svg{width:19px;height:19px;flex-shrink:0}.navbtn .counter{margin-left:auto;background:rgba(255,255,255,.14);padding:3px 8px;border-radius:20px;font-size:11px;color:#eff6ff}.sidebar-bottom{margin-top:auto;padding:16px;border:1px solid #42607e;border-radius:13px;background:rgba(255,255,255,.045);font-size:12px;line-height:1.5;color:#b7cbe1}.sidebar-bottom strong{display:block;color:#fff;font-size:13px;margin-bottom:5px}.dot{display:inline-block;border-radius:50%;width:9px;height:9px;background:#6fe1b0;box-shadow:0 0 0 4px #6fe1b021;margin-right:8px}
+.main{min-width:0}.topbar{background:#fff;border-bottom:1px solid var(--line);padding:21px 33px;display:flex;align-items:center;justify-content:space-between;gap:16px}.crumb{font-size:13px;color:#70819a}.crumb strong{color:#254b7b}.righttop{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.demo-tag{color:#785514;background:#fff5d8;border:1px solid #fae5a5;padding:8px 12px;border-radius:20px;font-weight:750;font-size:11px;letter-spacing:.05em}.avatar{height:39px;width:39px;border-radius:50%;background:#e8f0fb;color:#2a598e;display:grid;place-items:center;font-weight:800;font-size:12px}.content{max-width:1440px;margin:0 auto;padding:30px 33px 60px}.page-title{display:flex;align-items:end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:25px}.eyebrow{color:#4a76b2;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:9px}.page-title h1{font-size:30px;letter-spacing:-.035em;line-height:1.13;margin:0 0 9px;color:#1b304b}.subtitle{font-size:14px;color:var(--muted);margin:0;line-height:1.6}.primary{border:0;color:#fff;background:#2468cc;border-radius:11px;padding:13px 19px;font-size:14px;font-weight:760;display:inline-flex;align-items:center;gap:10px;box-shadow:0 5px 14px #2468cc32}.primary:hover{background:#1454b7}.primary svg{width:19px;height:19px}.outline{background:#fff;border:1px solid #d2deec;color:#315277;border-radius:10px;padding:11px 15px;font-size:13px;font-weight:750}.outline:hover{background:#f2f7fd}.mini{background:#fff;border:1px solid #dce5f1;border-radius:9px;padding:8px 11px;color:#385b82;font-size:12px;font-weight:750}.mini:hover{background:#f1f6fc}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-bottom:24px}.stat{border:1px solid var(--line);background:#fff;border-radius:15px;box-shadow:var(--shadow);padding:21px;display:flex;align-items:center;gap:17px}.stat-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:13px;flex-shrink:0}.stat-icon svg{width:25px;height:25px}.stat-icon.lost{background:#eaf2ff;color:#286ce3}.stat-icon.found{background:#e6f7f2;color:#1c8d70}.stat-icon.match{background:#fff3df;color:#b87a25}.stat-num{font-size:27px;font-weight:850;line-height:1.1;letter-spacing:-.03em}.stat-label{font-size:12px;color:#71839b;margin-top:6px;font-weight:650}.split{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(290px,1fr);gap:21px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:22px 23px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf0f5}.panel h2{font-size:17px;letter-spacing:-.015em;margin:0}.panel-note{font-size:12px;color:#8390a2;margin-top:7px}.panel-body{padding:20px 23px}.matches{display:grid;gap:14px}.match-card{border:1px solid #e4eaf2;border-radius:14px;padding:16px;background:#fff;display:grid;grid-template-columns:110px 1fr;gap:17px;align-items:center}.previewpic{width:100%;aspect-ratio:1;display:grid;place-items:center;border-radius:12px;background:#eef3f8;position:relative;overflow:hidden}.previewpic svg{width:78%;height:78%}.previewpic img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;padding:3px;background:#eef3f8}.phototag{position:absolute;bottom:5px;left:5px;right:5px;text-align:center;background:#ffffffd9;border-radius:5px;padding:3px;color:#617286;font-size:9px;font-weight:700}.match-name{font-size:16px;font-weight:850;margin:3px 0 8px}.match-desc{font-size:12px;color:#66768a;line-height:1.65}.score{color:#146b51;background:#e9f7f0;font-size:11px;font-weight:800;border-radius:9px;padding:6px 9px;display:inline-block}.score.review{background:#fff1dc;color:#9a6116}.match-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.pill{display:inline-flex;align-items:center;gap:6px;border-radius:20px;background:#edf4fd;color:#2860a3;font-weight:750;font-size:11px;padding:7px 10px}.itemname{font-size:17px;font-weight:850;letter-spacing:-.01em;white-space:normal;overflow-wrap:anywhere}.itemname.white-item{display:inline-block;-webkit-text-stroke:.7px #52657b;text-shadow:0 1px 1px #51617744}.itemname.multicolor-item{background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;display:inline-block;background-color:transparent}.itemname.camo-item{background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;display:inline-block;text-shadow:0 0 0 rgba(0,0,0,0)}.muted{color:var(--muted)}.small{font-size:12px}.found-list{display:grid;gap:13px}.found-row{display:flex;gap:13px;align-items:center;padding-bottom:13px;border-bottom:1px solid #edf2f7}.found-row:last-child{border:0;padding-bottom:0}.found-row .previewpic{width:74px;min-width:74px}.found-details{flex:1;min-width:0}.found-details strong{display:block;font-size:14px}.found-details small{font-size:11px;color:#8390a3;display:block;margin-top:6px;line-height:1.45}.status{font-size:11px;padding:6px 9px;border-radius:20px;display:inline-block;background:#edf2ff;color:#3562a5;font-weight:750}.status.green{background:#e7f7ed;color:#167949}.caption{font-size:11px;color:#8998a9;padding:14px 20px;background:#fbfcfe;border-top:1px solid #edf1f6;line-height:1.6}.section-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}.search{border:1px solid #d9e4f0;border-radius:11px;padding:12px 15px;width:min(450px,100%);background:#fff;font-size:14px;color:#2c4059}.datatable{width:100%;border-collapse:collapse;min-width:680px}.datatable th{text-align:left;background:#f8fafd;color:#647791;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:15px 19px}.datatable td{padding:15px 19px;border-top:1px solid #ecf1f7;font-size:13px;vertical-align:middle}.datatable tr:hover td{background:#fbfdff}.table-scroller{overflow-x:auto}.itemcell{display:flex;align-items:center;gap:12px}.itemcell .previewpic{width:61px;min-width:61px}.detail-name{font-weight:800;font-size:13px}.small-note{font-size:11px;color:#8392a4;margin-top:5px}.noresults{padding:35px 18px;color:#6c8095;text-align:center}.help-panel{border:1px dashed #bcd4ef;background:#f3f8ff;border-radius:14px;padding:19px;display:flex;gap:17px;align-items:start;margin-top:19px}.help-panel svg{color:#3873b6;width:25px;height:25px;flex-shrink:0}.help-panel strong{display:block;margin-bottom:7px}.help-panel p{font-size:12px;color:#647d98;line-height:1.65;margin:0}.layout-list{display:grid;gap:16px}.match-hero{background:linear-gradient(135deg,#ebf6ff,#f5f9ff);border:1px solid #cfe5f9;padding:19px;border-radius:15px;display:flex;align-items:center;gap:17px;margin-bottom:20px}.match-hero h2{font-size:18px;margin:0 0 6px}.match-hero p{font-size:13px;margin:0;color:#5f7c98}.match-hero .iconbox{display:grid;place-items:center;background:#fff;width:51px;height:51px;border-radius:12px;color:#2d76c7}.match-hero svg{width:25px;height:25px}.confirmed{color:#187447;background:#e9f8ed;border-radius:8px;padding:7px 9px;font-weight:750;font-size:11px}.empty{padding:35px;text-align:center;color:#657990}.empty h3{font-size:17px;color:#20334d;margin-bottom:6px}.modal-backdrop{position:fixed;inset:0;background:#12233ccc;z-index:30;display:none;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal{width:min(620px,100%);background:white;border-radius:19px;box-shadow:0 23px 80px #0006;max-height:92vh;overflow-y:auto}.modal-top{display:flex;justify-content:space-between;align-items:center;padding:23px 25px 17px;border-bottom:1px solid var(--line)}.modal-top h2{font-size:20px;margin:0}.close{background:#edf2f8;color:#355271;border:0;border-radius:9px;font-weight:850;width:35px;height:35px;font-size:20px}.modalbody{padding:21px 25px}.uploadzone{border:2px dashed #b9d0eb;background:#f7faff;border-radius:15px;padding:22px;text-align:center;position:relative;min-height:160px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:10px}.uploadzone svg{width:29px;height:29px;color:#3571bd}.uploadzone strong{font-size:15px}.uploadzone span{font-size:12px;color:#7d8ea4}.uploadzone input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}.photo-selected{max-height:190px;max-width:100%;border-radius:10px;object-fit:contain}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:19px}.field{display:grid;gap:7px}.field label{font-size:12px;font-weight:750;color:#3c526e}.field input,.field select{width:100%;padding:12px 11px;border:1px solid #d5dfed;border-radius:9px;font-size:14px;background:#fff}.formnote{background:#fff8e9;border:1px solid #faebc7;padding:12px;border-radius:10px;margin-top:18px;font-size:12px;line-height:1.6;color:#84632a}.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;flex-wrap:wrap}.toast{position:fixed;bottom:24px;right:24px;z-index:40;padding:13px 17px;color:#fff;background:#203b5d;border-radius:12px;box-shadow:0 10px 30px #10284759;font-size:13px;font-weight:700;display:none}.toast.show{display:block}.foot{margin-top:25px;font-size:12px;color:#8290a3;line-height:1.7}.foot strong{color:#506680}@media(max-width:1110px){.shell{grid-template-columns:200px 1fr}.content{padding:25px 22px}.topbar{padding:18px 22px}.split{grid-template-columns:1fr}.sidebar{padding-left:10px;padding-right:10px}}@media(max-width:720px){.shell{display:block}.sidebar{min-height:0;display:block;padding:14px 13px}.logo{padding:4px 3px}.brand{font-size:15px}.mark{width:35px;height:35px}.sidebar-label,.sidebar-bottom{display:none}.sidebar .nav{display:flex;flex-direction:row;gap:5px;overflow-x:auto;margin-top:16px}.navbtn{width:auto;min-width:max-content;padding:11px 10px;font-size:12px}.navbtn svg{width:17px;height:17px}.navbtn .counter{display:none}.topbar{padding:14px 16px}.content{padding:20px 13px}.page-title h1{font-size:26px}.stats{gap:8px}.stat{padding:12px 9px;display:block}.stat-icon{width:37px;height:37px;margin-bottom:10px}.stat-icon svg{width:20px;height:20px}.stat-num{font-size:23px}.stat-label{font-size:11px}.panel-head,.panel-body{padding:16px}.match-card{grid-template-columns:83px 1fr;gap:11px;padding:12px}.match-name{font-size:14px}.fields{grid-template-columns:1fr}.modalbody{padding:17px}.modal-top{padding:17px}.primary{width:100%;justify-content:center}.page-title{align-items:stretch}.previewpic svg{width:86%;height:86%}}
+
+.itemsbox{display:flex;flex-wrap:wrap;gap:5px 16px;max-width:430px;align-items:baseline}
+.itemsbox.scrolls{flex-direction:column;flex-wrap:nowrap;gap:6px;max-height:128px;overflow-y:auto;padding:9px 12px;border:1px solid #cfdcec;border-radius:10px;background:#fbfdff}
+.itembullet{display:inline-block;line-height:1.35}.itembullet.hit{background:#fff3c4;border-radius:6px;padding:1px 7px;box-shadow:0 0 0 1px #f1d777}
+.scrollhint{font-size:11px;font-weight:800;color:#2468cc;margin-top:6px}.scrollhint::before{content:'\2193  '}
+.vmtext{max-height:160px;overflow:auto;margin-top:6px;max-width:330px;white-space:pre-wrap}
+.phone-line{font-size:15px;font-weight:850;color:#173b6b;font-variant-numeric:tabular-nums}
+.vm-count{display:inline-block;margin-left:6px;font-size:11px;font-weight:800;color:#5b6f88;background:#eef3fa;border-radius:20px;padding:2px 8px}
+
+.split-match{display:block}
+.sm-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.sm-body{display:grid;grid-template-columns:1fr 34px 1fr;gap:0;align-items:stretch}
+.sm-side{border:1px solid #dbe5f1;border-radius:14px;padding:13px 16px;min-width:0}
+.sm-lost{background:#f6f9ff;border-color:#cddff5}.sm-found{background:#f4fbf7;border-color:#c9e9d6}
+.sm-tag{font-size:11px;font-weight:850;letter-spacing:.08em;color:#4a6a92;margin-bottom:10px}.sm-found .sm-tag{color:#2f7a55}
+.sm-big{font-size:22px;font-weight:850;margin:2px 0 6px}.sm-big .itemname{font-size:24px}
+.sm-person{font-size:15px;font-weight:750;color:#243a57}.sm-label{font-size:11px;font-weight:800;color:#5b6f88;margin:12px 0 6px;text-transform:uppercase;letter-spacing:.05em}
+.sm-arrow{display:grid;place-items:center;font-size:26px;color:#7e93ad}
+.sm-row{display:flex;flex-wrap:wrap;gap:12px 14px;align-items:flex-start}.sm-photo{width:170px;flex:none;cursor:zoom-in}.sm-photo .previewpic{aspect-ratio:1;width:100%}.sm-foundtext{min-width:0;flex:1 1 150px}.sm-big .itemname{overflow-wrap:break-word;word-break:normal}.zoomnote{font-size:10px;color:#2f7a55;font-weight:700;text-align:center;margin-top:4px}
+.lightbox{position:fixed;inset:0;background:#0b1626e6;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}.lightbox img{max-width:96vw;max-height:92vh;border-radius:10px;background:#fff}
+.sm-msg{margin-top:8px;font-size:12px}.sm-msg summary{cursor:pointer;color:#286399;font-weight:700}
+@media(max-width:900px){.sm-body{grid-template-columns:1fr}.sm-arrow{transform:rotate(90deg);padding:4px}}
+/* ===== Monsey Trails brand colors: dark navy + yellow-green ===== */
+:root{--mt-navy:#0b1a26;--mt-navy2:#12202c;--mt-line:#1e2c35;--mt-lime:#ebff5c;--mt-lime-dk:#d3e84a;--mt-soft:#9fb0bd;--canvas:#0b1a26}
+html,body{background:#0b1a26}
+.sidebar{background:#12202c;border-right:1px solid #1e2c35;color:#d6e0e8}
+.sidebar .brand,.sidebar .brand *{color:#ebff5c}
+.sidebar-label{color:#7d93a3}
+.mark{background:#ebff5c;color:#0b1a26}
+.navbtn{color:#cfdae3}.navbtn:hover{background:#1a2d3c;color:#fff}
+.navbtn.active{background:#ebff5c;color:#0b1a26;box-shadow:none}
+.navbtn.active svg{color:#0b1a26}
+.navbtn .counter{background:rgba(255,255,255,.12);color:#e6eef4}
+.navbtn.active .counter{background:#0b1a26;color:#ebff5c}
+.sidebar-bottom{color:#9fb0bd}.sidebar-bottom strong{color:#ebff5c}
+.topbar{background:#0b1a26;border-bottom:1px solid #1e2c35}
+.crumb{color:#9fb0bd}.crumb strong{color:#ebff5c}
+.avatar{background:#ebff5c;color:#0b1a26}
+.demo-tag{background:#1e2c35;border-color:#2b3d4a;color:#ebff5c}
+.eyebrow{color:#ebff5c}
+.page-title h1{color:#ebff5c}
+.subtitle{color:#b7c5d1}
+.primary{background:#ebff5c;color:#0b1a26;box-shadow:0 5px 16px #ebff5c26}
+.primary:hover{background:#d3e84a}
+.section-bar .small,.section-bar .muted{color:#9fb0bd}
+.search{background:#fff}
+.foot{color:#9fb0bd}.foot strong{color:#ebff5c}
+.stat-num{color:#0b1a26}
+.panel-head h2,.panel h2{color:#0b1a26}
+.mini:hover,.outline:hover{background:#f3f9c8}
+.score{background:#f3ffb0;color:#2d3a00}
+.sm-tag{color:#4a6a92}
+.scrollhint{color:#3a4d00}.itembullet.hit{background:#f3ffb0;box-shadow:0 0 0 1px #d3e84a}
+.toast{background:#ebff5c;color:#0b1a26}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #ebff5c;outline-offset:2px}
+
+.topshell{display:block!important}.topnavbar{display:flex;align-items:center;gap:22px;padding:12px 28px;background:#0b1a26;border-bottom:1px solid #1e2c35;position:sticky;top:0;z-index:20;flex-wrap:wrap}
+.topnavbar .logo{display:flex;align-items:center;gap:10px;margin:0;padding:0}.topnav{display:flex;gap:8px;flex:1;flex-wrap:wrap}
+.topnav .navbtn{width:auto;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-weight:700}
+.topshell .main{max-width:1280px;margin:0 auto;width:100%}.topshell .content{padding:22px 28px}
+
+.topsearch{width:min(340px,100%)!important;padding:10px 14px!important;border-radius:999px!important;margin-left:6px}
+.idate{font-size:11px;font-weight:600;color:#7a8da1;margin-left:4px}.itembullet.done .itemname{text-decoration:line-through;opacity:.55}.itembullet.done .idate{text-decoration:line-through;opacity:.55}.foundtag{font-size:10px;font-weight:800;background:#e7f7ed;color:#167949;border-radius:6px;padding:2px 6px}.itembullet{display:block}.calledin{font-size:12px;color:#5d7186;font-weight:600}.custbtn{background:transparent;border:0;padding:0;font-weight:800;font-size:13px;color:#1b304b;text-align:left;cursor:pointer;text-decoration:underline dotted}
+.custdrop{margin-top:6px;padding:8px 10px;border:1px solid #d6e0ea;border-radius:10px;background:#f6f9fc;display:grid;gap:6px;max-width:260px}
+.phonebtn{background:#ebff5c;color:#0b1a26;border:0;border-radius:8px;padding:7px 11px;font-weight:800;cursor:pointer;text-align:left}
+.cust-item{margin-bottom:12px}.cg{display:grid;gap:10px;margin:14px 0}.cg-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px;border:1px solid #e1e8f0;border-radius:11px}
+.cg-row .cnt{flex:1;min-width:140px;font-size:13px}.seg{display:inline-flex;border:1px solid #cdd8e3;border-radius:10px;overflow:hidden}.seg button{border:0;background:#fff;padding:10px 14px;font-weight:700;cursor:pointer}.seg button.on{background:#0b1a26;color:#ebff5c}
+a.primary{text-decoration:none}.hist{font-size:12px;color:#5d7186;max-height:110px;overflow:auto}
+
+.wheresel{padding:7px 9px;border-radius:8px;border:1px solid #c9d4de;background:#fff;font-weight:600;max-width:100%}.whereother{margin-top:6px;padding:8px;border-radius:8px;border:1px solid #c9d4de;width:100%}.busdd{margin:6px 0}.busdd .tripbox input{margin:2px 0}.rdate{font-weight:700}.heb{display:block;font-size:11px;color:#5d7186;font-weight:600;white-space:nowrap;margin-top:2px}.tripline{font-size:12px;color:#2f4a6b;font-weight:700;margin-top:4px}
+.hebcal{margin-top:22px}.hgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:14px 18px 20px}.hh{font-size:11px;font-weight:800;text-transform:uppercase;color:#7a8da1;text-align:center}
+.hc{border:1px solid #e1e8f0;border-radius:10px;background:#fff;min-height:64px;padding:6px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}.hc.empty{border:0;background:transparent;cursor:default}
+.hc .hd{font-size:18px;font-weight:800;color:#1b304b}.hc .gd{font-size:10px;color:#7a8da1}.hc .hn{font-size:10px;font-weight:800;color:#167949;text-align:center}.hc.has{background:#f1fbe6}.hc.today{outline:3px solid #ebff5c;background:#0b1a26}.hc.today .hd{color:#ebff5c}.hc.today .gd{color:#c8d6e2}
+@media(max-width:720px){.hc{min-height:48px}.hc .hn{display:none}}
+
+.topshell .main{max-width:1100px!important}
+.sidequote{position:fixed;top:12vh;height:76vh;width:calc((100vw - 1100px)/2 - 28px);display:none;overflow:hidden;z-index:1;
+ -webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+.sidequote.left{left:14px}.sidequote.right{right:14px}
+.sidequote .track{display:flex;flex-direction:column;gap:34px;animation:qdown linear infinite;will-change:transform}
+.sidequote:hover .track{animation-play-state:paused}
+@keyframes qdown{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.sidequote .qi{color:#ffffff;font-weight:800;font-size:clamp(17px,1.6vw,26px);line-height:1.3;letter-spacing:-.01em}
+.sidequote .qi:nth-child(3n+1){color:#ebff5c}
+.sidequote .qi.heb1{font-family:"David","Times New Roman","Noto Serif Hebrew",serif;direction:rtl;text-align:center;font-weight:700;font-size:clamp(17px,1.65vw,25px);line-height:1.5;color:#ebff5c}
+.sidequote .qi.heb1:nth-child(2n){color:#ffffff}
+.sidequote .cite{font-family:"Segoe UI",Arial,sans-serif;font-size:12px;font-weight:600;margin-top:6px;color:#7d93a3}
+@media (prefers-reduced-motion:reduce){.sidequote .track{animation:none}}
+.quotefoot{margin:26px auto 30px;max-width:1100px;text-align:center;color:#9fb0bd;font-size:13px;padding:0 20px}
+.quotefoot b{color:#ebff5c}.quotefoot .heb1{display:block;direction:rtl;font-family:"David","Times New Roman",serif;color:#ebff5c;font-size:20px;margin-top:8px}
+@media(min-width:1560px){.sidequote{display:block}.quotefoot{display:none}}
+</style>
+</head>
+<body><div class="shell topshell"><header class="topnavbar"><div class="logo"><div class="mark">MT</div><div class="brand">Monsey Trails<small>Lost & Found</small></div></div><nav class="topnav" aria-label="Sections"><button type="button" data-tab="lost" class="navbtn active">Lost Reports <span class="counter" id="lost-count2">0</span></button><button type="button" data-tab="found" class="navbtn">Found Items <span class="counter" id="found-count2">0</span></button><button type="button" data-tab="returned" class="navbtn">Returned <span class="counter" id="ret-count2">0</span></button><button type="button" data-tab="notfound" class="navbtn">Not Found <span class="counter" id="nf-count2">0</span></button><button type="button" data-tab="dp" class="navbtn">Didn't Pick Up <span class="counter" id="dp-count2">0</span></button><button type="button" data-tab="trash" class="navbtn">Trash <span class="counter" id="trash-count2">0</span></button></nav><input class="search topsearch" id="itemSearch" type="search" placeholder="Search item, name or phone…" aria-label="Search by item, name or phone" autocomplete="off"><button id="addFound" class="primary" type="button">+ Add Found Item</button></header><div hidden><span id="pageTitle"></span><span id="pageSubtitle"></span><span id="breadcrumb"></span><span id="countLost"></span><span id="countFound"></span><span id="countMatches"></span><span id="lost-nav-count"></span><span id="found-nav-count"></span><span id="match-nav-count"></span><button id="addText" type="button"></button></div><main class="main"><div class="content"><div id="view"></div><div id="hebcal"></div></div></main></div>
+<div class="modal-backdrop" id="modalWrap" role="presentation"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-top"><h2 id="modalTitle">Photograph a found item</h2><button type="button" class="close" id="closeModal" aria-label="Close">×</button></div><div class="modalbody">
+<p class="subtitle" style="margin-bottom:14px">Choose up to 10 photos at once. The app saves all photos first, then identifies each item automatically as Google quota allows.</p>
+<div class="uploadzone" id="uploadZone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="6" width="20" height="16" rx="2"/><circle cx="12" cy="14" r="4"/><path d="M7 6l2-4h6l2 4"/></svg><strong id="photoHeader">Choose up to 10 pictures together</strong><span id="photoHelp">Photo is saved first, then analyzed automatically</span><input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp,image/gif" multiple aria-label="Select up to ten found-item photos"></div>
+<div style="margin-top:14px"><button type="button" class="outline" data-opentext="1" style="width:100%">No picture? Add it by typing instead</button></div><details style="margin-top:18px"><summary class="small muted">Optional: add where you found it</summary><div class="field" style="margin-top:12px"><label for="locationInput">Found at</label><div id="locWrap"></div></div><div id="pfTrip"></div></details>
+<div class="formnote"><strong>Google Gemini photo AI:</strong> Gemini analyzes photos online; first obtain a free Gemini API key. If the suggested name or color is wrong, use <strong>Edit</strong> on the found-item row. Found-item photos are sent to Google AI for recognition; do not upload private customer information.</div>
+<div class="modal-actions"><button type="button" id="cancelModal" class="outline">Cancel</button><button type="button" id="saveFound" class="primary" style="display:none">Retry upload</button></div>
+</div></div></div>
+<div class="modal-backdrop" id="editWrap" role="presentation"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="editTitle"><div class="modal-top"><h2 id="editTitle">Correct a found item</h2><button type="button" class="close" id="closeEdit" aria-label="Close">×</button></div><div class="modalbody"><p class="subtitle">Change a mistaken item name or color. Your correction will be saved and matching will update.</p><div class="fields"><div class="field"><label for="editItem">Item name</label><input id="editItem" placeholder="e.g. Coat, Carriage, AirPods" maxlength="80"></div><div class="field"><label for="editColor">Color from photo</label><select id="editColor"><option value="">Not sure</option><option value="blue">Blue</option><option value="black">Black</option><option value="white">White</option><option value="silver">Silver</option><option value="gray">Gray</option><option value="red">Red</option><option value="green">Green</option><option value="pink">Pink</option><option value="brown">Brown</option><option value="gold">Gold</option><option value="yellow">Yellow</option><option value="purple">Purple</option><option value="orange">Orange</option><option value="beige">Beige</option><option value="navy">Navy</option><option value="charcoal">Charcoal</option><option value="light gray">Light gray</option><option value="cream">Cream</option><option value="tan">Tan</option><option value="khaki">Khaki</option><option value="teal">Teal</option><option value="turquoise">Turquoise</option><option value="cyan">Cyan</option><option value="olive">Olive</option><option value="lime">Lime</option><option value="coral">Coral</option><option value="maroon">Maroon</option><option value="burgundy">Burgundy</option><option value="lavender">Lavender</option><option value="magenta">Magenta</option><option value="multicolor">Multicolor</option><option value="camouflage">Camouflage</option></select></div></div><div id="edTrip"></div><div class="modal-actions"><button id="cancelEdit" class="outline" type="button">Cancel</button><button id="saveEdit" class="primary" type="button">Save correction</button></div></div></div></div>
+<aside class="sidequote left" aria-hidden="true"><div class="track" style="animation-duration:130s"><div class="qi">Your journey ends, our responsibility doesn't.</div><div class="qi">Your journey starts, our care begins.</div><div class="qi">Lost on the bus? Found with us.</div><div class="qi">Every item has an owner.</div><div class="qi">We don't stop until it's home.</div><div class="qi">Hashavas aveidah, every single day.</div><div class="qi">Someone is missing it right now.</div><div class="qi">Honest hands, safe return.</div><div class="qi">From our bus to your hands.</div><div class="qi">Returned with care.</div><div class="qi">Your things matter to us.</div><div class="qi">Lost today, found tomorrow.</div><div class="qi">The ride is over. The responsibility is not.</div><div class="qi">We keep it safe until you do.</div><div class="qi">Your journey ends, our responsibility doesn't.</div><div class="qi">Your journey starts, our care begins.</div><div class="qi">Lost on the bus? Found with us.</div><div class="qi">Every item has an owner.</div><div class="qi">We don't stop until it's home.</div><div class="qi">Hashavas aveidah, every single day.</div><div class="qi">Someone is missing it right now.</div><div class="qi">Honest hands, safe return.</div><div class="qi">From our bus to your hands.</div><div class="qi">Returned with care.</div><div class="qi">Your things matter to us.</div><div class="qi">Lost today, found tomorrow.</div><div class="qi">The ride is over. The responsibility is not.</div><div class="qi">We keep it safe until you do.</div></div></aside>
+<aside class="sidequote right" aria-hidden="true"><div class="track" style="animation-duration:150s"><div class="qi heb1">הָשֵׁב תְּשִׁיבֵם לְאָחִיךָ<div class="cite">דברים כב:א</div></div><div class="qi heb1">וַהֲשֵׁבֹתוֹ לוֹ<div class="cite">דברים כב:ב</div></div><div class="qi heb1">וְכֵן תַּעֲשֶׂה לְכָל אֲבֵדַת אָחִיךָ אֲשֶׁר תֹּאבַד מִמֶּנּוּ וּמְצָאתָהּ<div class="cite">דברים כב:ג</div></div><div class="qi heb1">לֹא תוּכַל לְהִתְעַלֵּם<div class="cite">דברים כב:ג</div></div><div class="qi heb1">וַאֲסַפְתּוֹ אֶל תּוֹךְ בֵּיתֶךָ וְהָיָה עִמְּךָ עַד דְּרֹשׁ אָחִיךָ אֹתוֹ<div class="cite">דברים כב:ב</div></div><div class="qi heb1">כִּי תִפְגַּע שׁוֹר אֹיִבְךָ אוֹ חֲמֹרוֹ תֹעֶה הָשֵׁב תְּשִׁיבֶנּוּ לוֹ<div class="cite">שמות כג:ד</div></div><div class="qi heb1">אֶת הָאֹבֶדֶת אֲבַקֵּשׁ וְאֶת הַנִּדַּחַת אָשִׁיב<div class="cite">יחזקאל לד:טז</div></div><div class="qi heb1">תָּעִיתִי כְּשֶׂה אֹבֵד בַּקֵּשׁ עַבְדֶּךָ<div class="cite">תהלים קיט:קעו</div></div><div class="qi heb1">הָשֵׁב תְּשִׁיבֵם לְאָחִיךָ<div class="cite">דברים כב:א</div></div><div class="qi heb1">וַהֲשֵׁבֹתוֹ לוֹ<div class="cite">דברים כב:ב</div></div><div class="qi heb1">וְכֵן תַּעֲשֶׂה לְכָל אֲבֵדַת אָחִיךָ אֲשֶׁר תֹּאבַד מִמֶּנּוּ וּמְצָאתָהּ<div class="cite">דברים כב:ג</div></div><div class="qi heb1">לֹא תוּכַל לְהִתְעַלֵּם<div class="cite">דברים כב:ג</div></div><div class="qi heb1">וַאֲסַפְתּוֹ אֶל תּוֹךְ בֵּיתֶךָ וְהָיָה עִמְּךָ עַד דְּרֹשׁ אָחִיךָ אֹתוֹ<div class="cite">דברים כב:ב</div></div><div class="qi heb1">כִּי תִפְגַּע שׁוֹר אֹיִבְךָ אוֹ חֲמֹרוֹ תֹעֶה הָשֵׁב תְּשִׁיבֶנּוּ לוֹ<div class="cite">שמות כג:ד</div></div><div class="qi heb1">אֶת הָאֹבֶדֶת אֲבַקֵּשׁ וְאֶת הַנִּדַּחַת אָשִׁיב<div class="cite">יחזקאל לד:טז</div></div><div class="qi heb1">תָּעִיתִי כְּשֶׂה אֹבֵד בַּקֵּשׁ עַבְדֶּךָ<div class="cite">תהלים קיט:קעו</div></div></div></aside>
+<div class="quotefoot"><b>Your journey ends, our responsibility doesn't.</b><span class="heb1">הָשֵׁב תְּשִׁיבֵם לְאָחִיךָ · וַהֲשֵׁבֹתוֹ לוֹ</span></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const colors={charcoal:'#343a40','light gray':'#c2c6cb',cream:'#f2e2c3',tan:'#bd9870',khaki:'#a89c70',teal:'#087e80',turquoise:'#31b8b7',cyan:'#2bbfe2',olive:'#718432',lime:'#9cd52a',coral:'#e56d5e',maroon:'#802c41',burgundy:'#7e314b',lavender:'#a79ad7',magenta:'#bb389a',blue:'#235bd5',black:'#151c28',silver:'#7c899b',white:'#f5f8ff',red:'#d33449',green:'#258557',gray:'#68778c',pink:'#c43c86',brown:'#935c3d',gold:'#a17a17',yellow:'#b58b00',purple:'#8046bb',orange:'#d86f24',beige:'#857153',navy:'#153d75',multicolor:'#3562a5',camouflage:'#55724a'};
+
+let lost=[], found=[], openMsgs=new Set(), matchLimit=30, lastSig='';
+let currentTab='lost', search='', photoData='', confirmed=new Set(), hiddenLost=new Set();
+let integrationFound=false, lastSync='', editingFoundId=null, savingPhoto=false;
+let selectedUploadId='';
+let pairs=[], lostMeta={}, matchVm='', matchQuery='';
+function normalizeItem(v){v=String(v||'').toLowerCase().trim(); if(/coat|jacket/.test(v))return 'coat';if(/wallet|purse/.test(v))return 'wallet';if(/ipad|tablet/.test(v))return 'ipad';if(/airpods|air pods|earbud/.test(v))return 'airpods';if(/backpack|bag/.test(v))return 'bag';if(/carriage|stroller|pram|buggy/.test(v))return 'carriage';if(/phone|iphone|mobile|flip phone/.test(v))return 'phone';if(/glasses|sunglasses/.test(v))return 'glasses';return v.replace(/s$/,'')}
+function itemText(r){
+  const safeHex=h=>/^#[0-9a-f]{6}$/i.test(String(h||''))?h:null;
+  const hex=safeHex(r.color_hex)||colors[r.color]||'#1d324f';
+  const name=esc(r.item);
+  const shades=Array.isArray(r.color_palette_hex)?r.color_palette_hex.map(safeHex).filter(Boolean):[];
+  if(r.color==='multicolor'||r.color==='camouflage'){
+    const palette=shades.length>=2?shades:(r.color==='camouflage'?['#556b2f','#755b35','#222e20']:['#bf4337','#2472be','#43a477']);
+    let stops=r.color==='camouflage'?palette.map((h,i)=>`${h} ${i*11}px ${(i+1)*11}px`).join(', '):palette.join(', ');
+    let bg=r.color==='camouflage'?`repeating-linear-gradient(135deg, ${stops})`:`linear-gradient(90deg, ${stops})`;
+    // background-image does NOT reset background-clip. The earlier background
+    // shorthand created a solid gradient rectangle instead of colored letters.
+    return `<span class="itemname multicolor-item" style="background-image:${bg};background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent">${name}</span>`;
+  }
+  const pale=['white','cream','ivory','light gray','silver','yellow','beige','lavender'].includes(r.color);
+  return `<span class="itemname ${pale?'white-item':''}" style="color:${hex}">${name}</span>`;
+}
+function itemArt(type,color){let fill=({blue:'#326bd9',black:'#262d3d',silver:'#bfc8d3',white:'#f6f8fc',red:'#d64e58',green:'#46a376',gray:'#9099a8',pink:'#de81ba',brown:'#8e6551',gold:'#d1ae48'})[color]||'#7c9caf'; let outline='#4b6281';if(type==='coat')return `<svg viewBox="0 0 140 140" role="img" aria-label="Illustration of a coat"><path d="M45 20l11-7h28l11 7 21 25-16 19-9-8v65H49V56l-9 8-16-19z" fill="${fill}" stroke="${outline}" stroke-width="3"/><path d="M56 13l14 21 14-21M70 35v86M52 77h13m10 0h13M56 102h10m8 0h10" stroke="${color==='black'?'#8493a8':'#ffffffbb'}" stroke-width="3" fill="none"/><circle cx="75" cy="48" r="2" fill="#cbd5e1"/></svg>`;
+if(type==='wallet')return `<svg viewBox="0 0 140 140" role="img" aria-label="Illustration of a wallet"><rect x="22" y="39" width="95" height="65" rx="10" fill="${fill}" stroke="${outline}" stroke-width="3"/><path d="M26 43v-10h79v14" fill="none" stroke="${outline}" stroke-width="3"/><rect x="73" y="62" width="51" height="25" rx="7" fill="#4e6380" stroke="#64748b" stroke-width="2"/><circle cx="111" cy="74" r="4" fill="#e9eff4"/></svg>`;
+if(type==='ipad')return `<svg viewBox="0 0 140 140" role="img" aria-label="Illustration of an iPad"><rect x="33" y="13" width="75" height="114" rx="10" fill="${fill}" stroke="#66778d" stroke-width="4"/><rect x="41" y="25" width="59" height="87" rx="2" fill="#4d6e91"/><circle cx="70" cy="119" r="3" fill="#5c6879"/><path d="M41 81l59-40" stroke="#ffffff44" stroke-width="5"/></svg>`;
+if(type==='airpods')return `<svg viewBox="0 0 140 140" role="img" aria-label="Illustration of AirPods"><rect x="29" y="65" width="82" height="49" rx="22" fill="#fff" stroke="#8795a6" stroke-width="3"/><path d="M29 85h82" stroke="#8795a6" stroke-width="2"/><circle cx="70" cy="99" r="3" fill="#9aa8b8"/><path d="M48 54v-22c0-9 7-15 14-11 5 3 4 12-1 15l-6 4v21M83 54v-22c0-9 7-15 14-11 5 3 4 12-1 15l-6 4v21" stroke="#a0aab7" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M48 54v-22c0-9 7-15 14-11 5 3 4 12-1 15l-6 4v21M83 54v-22c0-9 7-15 14-11 5 3 4 12-1 15l-6 4v21" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round"/></svg>`;
+return `<svg viewBox="0 0 140 140" role="img" aria-label="Illustration of found item"><rect x="33" y="40" width="75" height="75" rx="10" fill="${fill}" stroke="${outline}" stroke-width="3"/><path d="M48 40c0-29 45-29 45 0" fill="none" stroke="${outline}" stroke-width="4"/></svg>`}
+function pic(r){return `<div class="previewpic">${r.photo?`<img alt="Uploaded found item photo" loading="lazy" decoding="async" src="${r.photo}">`:itemArt(r.art||normalizeItem(r.item),r.color)}${r.photo?'':'<span class="phototag">No photo</span>'}</div>`}
+// MONSEY_LOST_FOUND_MATCH_V2 — entirely local; no Google API requests.
+// Compare meaning, not just exact photo-label text. Suggestions are NOT proof of ownership.
+const MATCH_CATEGORIES=[
+  ['earbud_case','earbuds',/(?:air\s*pods?|ear\s*buds?|ear\s*phones?|wireless\s*buds?|איירפודס|אוזני(?:ות|ה)|אירפודס|ערפאדס)/iu,/(?:case|charging|charger|holder|קייס|נרתיק)/iu],
+  ['phone_case','phone',/(?:\b(?:phone|iphone|cell\s*phone|smartphone|flip\s*phone|mobile|samsung|טלפון|פלאפון|טעלעפאן)\b|טלפון|פלאפון|טעלעפאן)/iu,/(?:\b(?:case|cover|holder)\b|קייס|נרתיק)/iu],
+  ['tefillin_bag','tefillin',/(?:tef[iy]l+in|tfillin|tefillen|תפילין|תפילן|תפלין)/iu,/(?:\b(?:bag|pouch|case)\b|תיק|בייטל|זעקל)/iu],
+  ['tallis_bag','tallis',/(?:tal+is|tallit|taleth|טלית|טליס)/iu,/(?:\b(?:bag|pouch|case)\b|תיק|בייטל|זעקל)/iu],
+  ['siddur','book',/(?:sid+ur|sid+er|s[iy]dur|siddor|סידור|סידער|סדור|סידורים)/iu],
+  ['tehillim','book',/(?:teh[ie]ll?im|tehilim|tilim|תהילים|תהלים)/iu],
+  ['chumash','book',/(?:chumash|khumash|חומש|חומשים)/iu],
+  ['tefillin','tefillin',/(?:tef[iy]l+in|tfillin|tefillen|תפילין|תפילן|תפלין)/iu],
+  ['tallis','tallis',/(?:tal+is|tallit|taleth|טלית|טליס)/iu],
+  ['earbuds','earbuds',/(?:air\s*pods?|ear\s*buds?|ear\s*phones?|wireless\s*buds?|איירפודס|אוזני(?:ות|ה)|אירפודס|ערפאדס)/iu],
+  ['headphones','headphones',/(?:head\s*phones?|head\s*sets?|העדפאנס|אוזניות\s*קשת)/iu],
+  ['flip_phone','phone',/(?:flip\s*phone|fold(?:ing|able)?\s*phone|פלאפון\s*כשר)/iu],
+  ['phone','phone',/(?:\b(?:phone|iphone|cell\s*phone|smartphone|mobile|samsung)\b|טלפון|פלאפון|טעלעפאן)/iu],
+  ['backpack','bag',/(?:back\s*pack|rucksack|school\s*bag|schoolbag|תיק\s*גב)/iu],
+  ['suitcase','bag',/(?:suit\s*case|luggage|carry\s*on|מזוודה|מזוודות|קעיס)/iu],
+  ['purse','bag',/(?:\bpurse\b|hand\s*bag|pocketbook|ארנק\s*אשה|תיק\s*יד)/iu],
+  ['wallet','wallet',/(?:wallet|walet|billfold|בארסל|ארנק|בארס)/iu],
+  ['cardholder','wallet',/(?:card\s*holder|card\s*case|כרטיסי\s*אשראי)/iu],
+  ['bag','bag',/(?:\bbags?\b|tote|pouch|תיק|זעקל|בעג|טאש)/iu],
+  ['sunglasses','glasses',/(?:sun\s*glasses|shades|משקפי\s*שמש)/iu],
+  ['glasses','glasses',/(?:eye\s*glasses|glasses|spectacles|brille|ברילן|משקפיים)/iu],
+  ['coat','coat',/(?:\b(?:coat|jacket|parka|raincoat)\b|מאנטל|רעקל|מעיל)/iu],
+  ['shoe','shoe',/(?:\b(?:shoes?|sneakers?|sneaks|loafers?|sandals?|slippers?|slides|crocs|clogs?|boots?|heels?|cleats?|trainers?)\b|סניקרס|סנקרס|נעל(?:ים|יים)?|שיך|שיכל(?:עך|ען)?)/iu],
+  ['socks','socks',/(?:\b(?:socks?|stockings?|tights)\b|זאקן|זאק|גרבי(?:ים|ם)|גרב)/iu],
+  ['gloves','gloves',/(?:\b(?:gloves?|mittens?)\b|הענטשקעס|הענטשקע|כפפות)/iu],
+  ['scarf','scarf',/(?:\b(?:scarf|scarves)\b|שאל|צעלייזער)/iu],
+  ['shirt','shirt',/(?:\b(?:shirt|t\s*shirt|sweater|sweatshirt|hoodie|blouse)\b|העמד|חולצה)/iu],
+  ['pants','pants',/(?:\b(?:pants|trousers|jeans|shorts|skirt|dress)\b|הויזן|מכנסיים)/iu],
+  ['hat','hat',/(?:\b(?:hat|cap|kippah|yarmulke|shtreimel|shtreiml)\b|כובע|כיפה|שטריימל)/iu],
+  ['keys','keys',/(?:\b(?:keys?|keychain|key\s*ring|car\s*key)\b|מפתחות|שליסל|שליסלעך)/iu],
+  ['stroller','stroller',/(?:stroller|carriage|pram|buggy|עגלת\s*תינוק|קינדערוועגן)/iu],
+  ['umbrella','umbrella',/(?:umbrella|שירעם|מטריה|מטרייה)/iu],
+  ['book','book',/(?:\b(?:book|sefer|seforim|seforim|prayer\s*book)\b|ספר|ספרים|בוך)/iu],
+  ['watch','watch',/(?:\b(?:watch|wristwatch|smartwatch)\b|שעון)/iu],
+  ['charger','charger',/(?:\b(?:charger|charging\s*brick|power\s*bank|powerbank)\b|מטען)/iu],
+  ['cable','cable',/(?:\b(?:cable|charging\s*cord|usb\s*cord)\b|כבל)/iu],
+  ['bottle','bottle',/(?:\b(?:bottle|thermos|water\s*bottle)\b|בקבוק|פלאשקע)/iu],
+  ['toy','toy',/(?:\b(?:toy|doll|teddy\s*bear)\b|צעצוע)/iu],
+  ['tape_dispenser','tape_dispenser',/(?:correction\s*tape|white\s*out|whiteout|tippex|tipex)/iu],
+];
+const MATCH_RARE=new Set(['siddur','tehillim','chumash','tefillin','tallis','tefillin_bag','tallis_bag']);
+const MATCH_UNSAFE_LABELS=/^(?:item needs review|item not recognized|analyzing photo|unknown|other item|thing|object)$/i;
+function cleanMatchText(v){return String(v||'').normalize('NFKC').toLowerCase().replace(/[\u0591-\u05c7]/g,'').replace(/[^\p{L}\p{N}]+/gu,' ').trim();}
+function classifyMatchItem(v){
+ const s=cleanMatchText(v);
+ if(!s||MATCH_UNSAFE_LABELS.test(s))return null;
+ for(const [type,group,pattern,required] of MATCH_CATEGORIES){if(pattern.test(s)&&(!required||required.test(s)))return {type,group,raw:s};}
+ const words=s.split(/\s+/).filter(w=>w.length>=3&&!['the','my','a','and','lost','found','with','black','blue','white','brown','gray','red','silver','case','bag'].includes(w));
+ if(words.length===0)return null;
+ return {type:'other:'+words.join(' '),group:'other',raw:s};
+}
+const MATCH_COLOR_GROUPS={navy:'blue',teal:'blue',turquoise:'blue',cyan:'blue',maroon:'red',burgundy:'red',coral:'red',charcoal:'gray',silver:'gray','light gray':'gray',tan:'brown',beige:'brown',khaki:'brown',cream:'white',ivory:'white',olive:'green',lime:'green',lavender:'purple',magenta:'pink'};
+function colorForMatch(rec,lostReport=false){
+ let value=cleanMatchText(rec.color);
+ if(!value&&lostReport){
+  let detail=cleanMatchText(rec.detail);
+  for(const [clr,pattern] of [
+   ['black',/(?:\bblack\b|שחור|שווארץ|shvarts|shwartz)/iu],
+   ['white',/(?:\bwhite\b|לבן|ווייס|veis)/iu],
+   ['blue',/(?:\bblue\b|כחול|בלוי|blau)/iu],
+   ['red',/(?:\bred\b|אדום|רויט|roit)/iu],
+   ['brown',/(?:\bbrown\b|חום|ברוין|broin)/iu],
+   ['gray',/(?:\b(?:gray|grey|silver)\b|אפור)/iu],
+   ['green',/(?:\bgreen\b|ירוק|גרין)/iu],
+   ['pink',/(?:\bpink\b|ורוד)/iu],
+   ['yellow',/(?:\byellow\b|צהוב)/iu],
+  ])if(pattern.test(detail)){value=clr;break;}
+ }
+ return MATCH_COLOR_GROUPS[value]||value;
+}
+
+// MONSEY_GENERAL_NAME_MATCH_V1
+// Compares *item meaning clues*, not only preset categories.
+// All suggestions require human verification. No additional Gemini requests.
+const GENERAL_IGNORE = new Set(['a','an','the','my','our','found','lost','item','object','thing',
+ 'small','large','little','big','old','new','nice','plastic','metal','wooden','made','with',
+ 'and','or','for','of','in','on','from','some','somebody','black','white','brown','gray','grey',
+ 'blue','red','pink','green','orange','gold','silver','yellow','purple','navy','cream','beige',
+ 'dark','light','point','type','kind','brand','brandname','regular','ordinary','used']);
+function generalMatchWords(value){
+ let s=cleanMatchText(value).replace(/\b([a-z]{4,})ies\b/g,'$1y');
+ return [...new Set(s.split(/\s+/u).map(w=>{
+   if(/^[a-z]{5,}$/.test(w)&&w.endsWith('ing'))w=w.slice(0,-3);
+   else if(/^[a-z]{5,}$/.test(w)&&w.endsWith('es'))w=w.slice(0,-2);
+   else if(/^[a-z]{4,}$/.test(w)&&w.endsWith('s')&&!w.endsWith('ss'))w=w.slice(0,-1);
+   return w;
+ }).filter(w=>w.length>=2&&!GENERAL_IGNORE.has(w)))];
+}
+function generalMatchProof(left,right){
+ const a=generalMatchWords(left), b=generalMatchWords(right);
+ if(!a.length||!b.length)return null;
+ const same=a.filter(x=>b.includes(x));
+ const minSize=Math.min(a.length,b.length);
+ // "ballpoint pen" vs "pen" and "portable battery pack" vs "battery pack"
+ // work without object-by-object lookup rules.
+ if(same.length>=1 && same.length===minSize)
+   return {points:68 + (a.join(' ')==b.join(' ')?9:0), note:'Shared item name with more specific description'};
+ if(same.length>=2 && same.length/Math.max(a.length,b.length)>=0.5)
+   return {points:64,note:'Multiple matching item-description words'};
+ // Tiny orthographic differences in the principal noun, excluding short strings
+ // where spelling similarity can cause false positives.
+ if(a.length===1&&b.length===1&&a[0].length>=6&&b[0].length>=6){
+   const x=a[0],y=b[0];
+   let d=0; const m=x.length,n=y.length;
+   if(Math.abs(m-n)>2)return null;
+   const prev=Array.from({length:n+1},(_,i)=>i);
+   for(let i=1;i<=m;i++){
+     let row=[i];
+     for(let j=1;j<=n;j++)row[j]=Math.min(row[j-1]+1,prev[j]+1,prev[j-1]+(x[i-1]===y[j-1]?0:1));
+     for(let j=0;j<=n;j++)prev[j]=row[j];
+   }
+   d=prev[n];
+   if(d<=1)return {points:62,note:'Similar spelling of the item name; verify'};
+ }
+ return null;
+}
+function scoreMatchPair(f,l){
+ const a=classifyMatchItem(f.item),b=classifyMatchItem(l.item);
+ if(!a||!b)return null;
+ const reasons=[];
+ let score;
+ if(a.type===b.type){
+   if(a.group==='other'){
+     const aw=generalMatchWords(f.item),bw=generalMatchWords(l.item);
+     const accessoryWords=['case','cover','bag','pouch','holder','charger','cable','strap','sleeve','box'];
+     if(accessoryWords.some(w=>aw.includes(w)!==bw.includes(w)))return null;
+     const proof=generalMatchProof(f.item,l.item);
+     if(!proof)return null;
+     score=proof.points; reasons.push(proof.note);
+   } else {score=78; reasons.push('Same item category');}
+ }
+ else if(a.group===b.group && a.group!=='other'){
+   const generic={book:'book',bag:'bag',phone:'phone',wallet:'wallet',glasses:'glasses',earbuds:'earbuds',tefillin:'tefillin',tallis:'tallis'};
+   if(a.type!==generic[a.group] && b.type!==generic[a.group])return null;
+   if(a.type==='phone_case'||b.type==='phone_case')return null;
+   score=63;reasons.push('Related item category; check details');
+ } else {
+   // Known incompatible object families must never match merely because both
+   // descriptions contain a common word like "case", "charger", "phone".
+   if(a.group!=='other'&&b.group!=='other')return null;
+   // An item and its accessory are not interchangeable: a pen is not a pen case,
+   // and a laptop is not its laptop bag, even with shared description words.
+   const aw=generalMatchWords(f.item), bw=generalMatchWords(l.item);
+   const accessoryWords=['case','cover','bag','pouch','holder','charger','cable','strap','sleeve','box'];
+   if(accessoryWords.some(w=>aw.includes(w)!==bw.includes(w)))return null;
+   const proof=generalMatchProof(f.item,l.item);
+   if(!proof)return null;
+   score=proof.points; reasons.push(proof.note);
+ }
+ const fc=colorForMatch(f),lc=colorForMatch(l,true);
+ if(fc&&lc){if(fc!==lc)return null;score+=12;reasons.push('Same reported color');}
+ else reasons.push('Color not verified');
+ if(MATCH_RARE.has(a.type)&&a.type===b.type)score+=4;
+ if(a.raw===b.raw)score+=3;
+ return {score:Math.min(95,score),reasons,found:f,lost:l,key:String(l.id)+'-'+String(f.id)};
+}
+
+function matches(){
+ const out=[];
+ for(const f of found){
+  if(['analyzing','waiting','needs_review'].includes(f.recognition_state))continue;
+  for(const l of lost){
+   if(hiddenLost.has(l.id)||isTrashed(l))continue;
+   const key=String(l.id)+'-'+String(f.id);
+   const result=scoreMatchPair(f,l);
+   if(result){out.push(result);}
+   else if(confirmed.has(key))out.push({found:f,lost:l,key,score:55,reasons:['Previously confirmed; item details now differ — review again'],previous:true});
+  }
+ }
+ return out.sort((a,b)=>Number(confirmed.has(b.key))-Number(confirmed.has(a.key))||b.score-a.score);
+}
+let _mcKey='',_mcVal=null;
+const _computeMatches=matches;
+matches=function(){
+  const key=found.length+'|'+lost.length+'|'+confirmed.size+'|'+hiddenLost.size+'|'+Object.values(lostMeta).filter(m=>m.trash==='yes').length+'|'
+    +found.map(f=>f.id+f.item+f.color+f.recognition_state).join(',')+'|'+lost.map(l=>l.id+l.color).join(',');
+  if(key!==_mcKey||!_mcVal){_mcVal=_computeMatches();_mcKey=key}
+  return _mcVal;
+};
+
+// ---------- Manual matching (nothing is matched automatically) ----------
+function legacyPairs(){
+  // Older confirmations saved as "lostId-foundId" keys by the previous version.
+  const have=new Set(pairs.map(p=>p.lost_id+'-'+p.found_id));
+  return [...confirmed].filter(k=>!have.has(k)).map(k=>{
+    const i=k.lastIndexOf('-');const lid=k.slice(0,i),fid=k.slice(i+1);
+    return {id:'legacy:'+k,legacy:true,key:k,lost_id:lid,found_id:fid,status:'confirmed',vm:'',lost_snap:{},found_snap:{}};
+  }).filter(p=>lost.some(l=>l.id===p.lost_id)&&found.some(f=>f.id===p.found_id));
+}
+function vmOf(id){const l=lost.find(x=>x.id===id);return l?(ck(l)):''}
+function pairCard(p){
+  const L=lost.find(x=>x.id===p.lost_id)||Object.assign({item:'',color:''},p.lost_snap);
+  const F=found.find(x=>x.id===p.found_id)||Object.assign({item:'',color:'',photo:'',where:''},p.found_snap);
+  const vm=p.vm||ck(L)||'';
+  const bus=(lostMeta[vm]||{}).bus;
+  const done=p.status==='confirmed';
+  const sameVm=lost.filter(x=>(ck(x))===vm&&!hiddenLost.has(x.id));
+  const caller=L.caller_id&&L.caller_id!==L.phone?`<div class="small-note">Calling from ${esc(L.caller_id)}</div>`:'';
+  const buttons=p.legacy?`<button class="mini" data-confirm="${esc(p.key)}">Undo</button>`
+    :done?`<button class="mini" data-pairstatus="${esc(p.id)}" data-to="pending">Undo — not picked up yet</button>`
+    :`<button class="primary" data-pairstatus="${esc(p.id)}" data-to="confirmed" style="padding:9px 16px">Confirm &mdash; I have it</button><button class="mini" data-pairremove="${esc(p.id)}">Remove match</button>`;
+  return `<div class="split-match">
+  <div class="sm-top"><span class="score ${done?'':'review'}">${done?'Confirmed — I have it':'Waiting for your confirmation'}</span>${p.created?`<span class="small muted">Matched ${esc(p.created)}</span>`:''}${p.confirmed_at?`<span class="small muted">· Confirmed ${esc(p.confirmed_at)}</span>`:''}</div>
+  <div class="sm-body">
+   <section class="sm-side sm-lost"><div class="sm-tag">LOST &mdash; what the customer reported</div>
+    <div class="sm-big">${itemText(L)}</div>
+    <div class="sm-person">${esc(L.name||'')}</div><div class="phone-line">${esc(L.phone||'')}</div>${caller}
+    ${bus?`<div class="small-note"><strong>Bus ${esc(bus)}</strong></div>`:''}
+    ${sameVm.length>1?`<div class="sm-label">Everything this customer lost</div>${itemsBox(sameVm,L.id)}`:''}
+   </section>
+   <div class="sm-arrow" aria-hidden="true">&#8644;</div>
+   <section class="sm-side sm-found"><div class="sm-tag">FOUND &mdash; what we have</div>
+    <div class="sm-row"><div class="sm-photo"${F.photo?` data-zoom="${esc(F.photo)}" title="Click to enlarge"`:''}>${pic(F)}${F.photo?'<div class="zoomnote">Click to enlarge</div>':''}</div>
+     <div class="sm-foundtext"><div class="sm-big">${itemText(F)}</div><div class="small-note">Found at ${esc(F.where||'')}</div><div class="small-note">${esc(F.date||'')}</div>${F.note?`<div class="small-note">${esc(F.note)}</div>`:''}</div></div>
+   </section>
+  </div>
+  <div class="match-controls">${buttons}</div></div>`;
+}
+function matchedView(){
+  const all=pairs.concat(legacyPairs()).filter(p=>{
+    const L=lost.find(x=>x.id===p.lost_id)||p.lost_snap||{},F=found.find(x=>x.id===p.found_id)||p.found_snap||{};
+    return filterStr(L.item,L.name,L.phone,F.item,F.where,F.color,L.color);});
+  const wait=all.filter(p=>p.status!=='confirmed'),done=all.filter(p=>p.status==='confirmed');
+  const sec=(h,note,arr,emp)=>`<section class="panel"><div class="panel-head"><div><h2>${h}</h2><div class="panel-note">${note}</div></div></div><div class="panel-body matches">${arr.length?arr.map(pairCard).join(''):`<div class="empty">${emp}</div>`}</div></section>`;
+  return `${searchbar()}<div class="layout-list">${sec('Waiting for your confirmation','You pressed Match. Look at both sides, then press “I have it” when the item is really in your hands.',wait,'Nothing waiting. On Lost Reports choose <strong>Match</strong> in the dropdown of a report.')}${sec('Matched — I have it','Items you confirmed you have for the customer.',done,'Nothing confirmed yet.')}</div>`;
+}
+function foundCandidates(vm){
+  const items=lost.filter(l=>(ck(l))===vm&&!hiddenLost.has(l.id));
+  const taken=new Set(pairs.map(p=>p.found_id));
+  const q=String(matchQuery||'').trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const rows=[];
+  for(const f of found){
+    if(f.archived)continue;
+    let best=null,bestItem=items[0]||null;
+    for(const l of items){const s=scoreMatchPair(f,l);if(s&&(!best||s.score>best.score)){best=s;bestItem=l}}
+    const hay=[f.item,f.color,f.where,f.note].join(' ').toLowerCase();
+    if(q.length&&!q.every(w=>hay.includes(w)))continue;
+    if(!q.length&&!best)continue;
+    rows.push({f,score:best?best.score:0,lostItem:bestItem,reasons:best?best.reasons:[],taken:taken.has(f.id)});
+  }
+  return rows.sort((a,b)=>b.score-a.score).slice(0,40);
+}
+function matchPopupHtml(){
+  const items=lost.filter(l=>(ck(l))===matchVm&&!hiddenLost.has(l.id));
+  const l0=items[0]||{};
+  const rows=foundCandidates(matchVm);
+  const bus=(lostMeta[matchVm]||{}).bus;
+  return `<div class="modal" role="dialog" aria-modal="true" style="max-width:760px;max-height:90vh;display:flex;flex-direction:column"><div class="modal-top"><h2>Match this lost report</h2><button type="button" class="close" data-closematch="1" aria-label="Close">×</button></div>
+  <div class="modalbody" style="overflow:auto">
+   <div class="small-note" style="margin-bottom:8px"><strong>${esc(l0.name||'')}</strong> ${esc(l0.phone||'')}${bus?' · Bus '+esc(bus):''}</div>
+   ${itemsBox(items)}
+   <div class="field" style="margin:14px 0 10px"><label for="matchSearch">Search all found items</label><input id="matchSearch" type="search" value="${esc(matchQuery)}" placeholder="Type item, color, bus… (empty shows best guesses)"></div>
+   <div id="matchList">${rows.length?rows.map(r=>`<div class="cand-row"><div class="cand-pic">${pic(r.f)}</div><div class="cand-text">${itemText(r.f)}<div class="small-note">${esc(r.f.where||'')} · ${esc(r.f.date||'')}</div>${r.score?`<div class="small-note">Looks similar (${esc(r.reasons.join(' · '))})</div>`:''}${r.taken?'<div class="small-note">Already matched to another report</div>':''}</div><button class="primary" data-dopair="${esc(r.f.id)}" data-lostid="${esc(r.lostItem?r.lostItem.id:'')}" style="padding:9px 16px">Match</button></div>`).join(''):'<div class="empty">No similar found items. Type in the search box to look through all found items, or add the item with “Add without a picture”.</div>'}</div>
+  </div></div>`;
+}
+function openMatchPopup(vm){matchVm=vm;matchQuery='';let w=$('matchWrap');if(!w){w=document.createElement('div');w.id='matchWrap';w.className='modal-backdrop';document.body.appendChild(w);
+  w.addEventListener('click',e=>{if(e.target===w)closeMatchPopup()});
+  w.addEventListener('input',e=>{if(e.target.id==='matchSearch'){matchQuery=e.target.value;const pos=e.target.selectionStart;clearTimeout(openMatchPopup.t);openMatchPopup.t=setTimeout(()=>{refreshMatchPopup();const n=$('matchSearch');if(n){n.focus();n.setSelectionRange(pos,pos)}},200)}})}
+  w.innerHTML=matchPopupHtml();w.classList.add('open')}
+function refreshMatchPopup(){const w=$('matchWrap');if(w&&w.classList.contains('open'))w.innerHTML=matchPopupHtml()}
+function closeMatchPopup(){const w=$('matchWrap');if(w)w.classList.remove('open');render()}
+
+function openLostModal(){let w=$('lostWrap');if(!w){w=document.createElement('div');w.id='lostWrap';w.className='modal-backdrop';document.body.appendChild(w);
+  w.addEventListener('click',e=>{if(e.target===w)w.classList.remove('open')});
+  w.innerHTML=`<div class="modal" role="dialog" aria-modal="true"><div class="modal-top"><h2>Add a lost item</h2><button type="button" class="close" data-closelost="1" aria-label="Close">×</button></div><div class="modalbody"><p class="subtitle">Type a lost report yourself, for example from a customer who came in. It goes into Lost Reports and matches found items like any other report.</p><div class="fields"><div class="field"><label for="lxName">Customer name</label><input id="lxName" maxlength="60" placeholder="e.g. Moshe Fried"></div><div class="field"><label for="lxPhone">Phone number</label><input id="lxPhone" maxlength="30" placeholder="e.g. 845-555-1234"></div></div><div class="field" style="margin-top:14px"><label for="lxItems">What was lost (separate with commas)</label><input id="lxItems" maxlength="400" placeholder="e.g. red shoe, black hat, tefillin"></div>${tripInputs('lx')}<div class="field" style="margin-top:12px"><label for="lxNote">Note (optional)</label><input id="lxNote" maxlength="300" placeholder="Anything else to remember"></div><div class="modal-actions"><button type="button" class="outline" data-closelost="1">Cancel</button><button type="button" class="primary" id="lxSave">Save lost report</button></div></div></div>`}
+  ['lxName','lxPhone','lxItems','lxNote'].forEach(i=>$(i).value='');setTrip('lx',{});w.classList.add('open');$('lxName').focus()}
+function openTextModal(){let w=$('textWrap');if(!w){w=document.createElement('div');w.id='textWrap';w.className='modal-backdrop';document.body.appendChild(w);
+  w.addEventListener('click',e=>{if(e.target===w)w.classList.remove('open')});
+  w.innerHTML=`<div class="modal" role="dialog" aria-modal="true"><div class="modal-top"><h2>Add a found item without a picture</h2><button type="button" class="close" data-closetext="1" aria-label="Close">×</button></div><div class="modalbody"><p class="subtitle">For something that was found but has no photo — for example, an item that came to the other yard. Just type it.</p><div class="fields"><div class="field"><label for="txItem">What was found</label><input id="txItem" placeholder="e.g. Tape, Tallis bag, Umbrella" maxlength="80"></div><div class="field"><label for="txColor">Color (optional)</label><select id="txColor">${$('editColor').innerHTML}</select></div><div class="field"><label>Found at</label><div id="txWhereWrap"></div></div><div class="field"><label for="txNote">Note (optional)</label><input id="txNote" placeholder="Anything else to remember" maxlength="300"></div></div>${tripInputs('tx')}<div class="modal-actions"><button type="button" class="outline" data-closetext="1">Cancel</button><button type="button" class="primary" id="txSave">Save found item</button></div></div></div>`;}
+  ['txItem','txNote'].forEach(i=>$(i).value='');$('txWhereWrap').innerHTML=whereSel('txWhere','Office');setTrip('tx',{});$('txColor').value='';w.classList.add('open');$('txItem').focus()}
+function filterStr(...args){
+  const words=String(search||'').trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if(!words.length)return true;
+  const hay=args.join(' ').toLowerCase();
+  return words.every(w=>hay.includes(w));
+}
+function matchCard(m){
+ const done=confirmed.has(m.key);
+ const strong=m.score>=85&&!m.previous;
+ const explanations=(m.reasons||[]).map(esc).join(' · ');
+ const sameVm=lost.filter(x=>(ck(x))===(ck(m.lost))&&!hiddenLost.has(x.id));
+ const callerNote=m.lost.caller_id&&m.lost.caller_id!==m.lost.phone?`<div class="small-note">Calling from ${esc(m.lost.caller_id)}</div>`:'';
+ return `<div class="split-match">
+  <div class="sm-top"><span class="score ${strong?'':'review'}">${m.previous?'Review previous confirmation':strong?'Good item-description match':'Possible match — check details'}</span>${done?'<span class="confirmed">Staff-confirmed link</span>':''}<span class="small muted">${explanations}</span></div>
+  <div class="sm-body">
+   <section class="sm-side sm-lost">
+    <div class="sm-tag">LOST &mdash; what the customer reported</div>
+    <div class="sm-big">${itemText(m.lost)}</div>
+    <div class="sm-person">${esc(m.lost.name)}</div>
+    <div class="phone-line">${esc(m.lost.phone)}</div>${callerNote}
+    <div class="sm-label">Everything this customer lost</div>
+    ${itemsBox(sameVm,m.lost.id)}
+    <div class="small-note" style="margin-top:8px">Reported ${esc(m.lost.date)}</div>
+    <details class="sm-msg"><summary>Show message</summary><div class="small-note vmtext">${esc(m.lost.detail)}</div></details>
+   </section>
+   <div class="sm-arrow" aria-hidden="true">&#8644;</div>
+   <section class="sm-side sm-found">
+    <div class="sm-tag">FOUND &mdash; what we have</div>
+    <div class="sm-row">
+     <div class="sm-photo"${m.found.photo?` data-zoom="${esc(m.found.photo)}" title="Click to enlarge"`:''}>${pic(m.found)}${m.found.photo?'<div class="zoomnote">Click to enlarge</div>':''}</div>
+     <div class="sm-foundtext"><div class="sm-big">${itemText(m.found)}</div>
+      <div class="small-note">Found at ${esc(m.found.where)}</div><div class="small-note">${esc(m.found.date)}</div></div>
+    </div>
+   </section>
+  </div>
+  <div class="match-controls"><button class="mini" data-confirm="${esc(m.key)}">${done?'Undo confirmation':'Confirm possible match'}</button><button class="mini" data-viewlost="${esc(m.lost.id)}">View Lost Reports</button></div>
+ </div>`;
+}
+function foundRow(r){return `<div class="found-row">${pic(r)}<div class="found-details">${itemText(r)}<small>${esc(r.where)}<br>${esc(r.date)}</small>${recognitionBadge(r)}${wikiEvidence(r)}</div><button class="mini" data-edit="${esc(r.id)}">Edit</button>${r.photo?`<button class="mini" data-reanalyze="${esc(r.id)}">Recheck</button>`:''}</div>`}
+// WIKIMEDIA-COMMONS-LOOKUP-V9
+function wikiEvidence(r){
+  if(!r.catalogue_status)return '';
+  const name=String(r.wiki_name||'');
+  const state=String(r.catalogue_status);
+  const note=name ? ('Wikipedia photo suggestion: '+name) :
+    (state==='no_results' ? 'No public image match found' :
+    (state==='unavailable' ? 'Wikipedia image search unavailable' : 'Wikipedia check: no confident name'));
+  let url=String(r.wiki_source||'');
+  let link=url.startsWith('https://commons.wikimedia.org/wiki/') ?
+    ` <a href="${esc(url)}" target="_blank" rel="noopener noreferrer" style="color:#2468cc">View example</a>` : '';
+  return `<div class="small-note" style="color:#43658b">${esc(note)}${link}</div>`;
+ }
+// MONSEY-GEMINI-PHOTO-V10
+function geminiDescription(r){
+  if(!r.ai_provider)return '';
+  let desc=String(r.caption||'').trim();
+  return '<div class="small-note" style="color:#385b82">'+esc(desc||'Google Gemini photo result')+'</div>';
+}
+function recognitionBadge(r){let state=r.recognition_state||'corrected';let label=state==='manual'?'Added without a picture':state==='analyzing'?'Analyzing photo — please wait…':state==='waiting'?'Saved — waiting for Gemini quota':state==='needs_review'?'Could not recognize — tap Edit':state==='review'?'AI suggestion — review if needed':state==='suggested'?'AI identified — check photo':'Saved';return `<div class="small-note" title="${esc([r.recognition_note||'',r.caption?'Second AI sees: '+r.caption:''].filter(Boolean).join(' | '))}">${esc(label)}</div>`}
+function searchbar(){return ''}
+function _oldSearchbar(){return `<div class="section-bar"><input class="search" id="itemSearch" type="search" value="${esc(search)}" placeholder="Search item, customer, route, or phone..." aria-label="Search reports"><span class="small muted">Saved records · Refresh to sync</span></div>`}
+function overview(){let ma=matches().filter(m=>!m.previous&&!(lostMeta[ck(m.lost)]||{}).status).slice(0,3);let li=found.filter(f=>filterStr(f.item,f.where,f.color)).slice(0,4);return `<div class="split"><section class="panel"><div class="panel-head"><div><h2>Just found for customers</h2><div class="panel-note">A customer item matched something in Found Items</div></div><button class="mini" data-go="lost">View all</button></div><div class="panel-body matches">${ma.length?ma.map(matchCard).join(''):'<div class="empty">Nothing yet. When a lost item matches a found item it appears here and the report moves to Found.</div>'}</div></section><section class="panel"><div class="panel-head"><div><h2>Recently found</h2><div class="panel-note">Items added to the office</div></div><button class="mini" data-go="found">View all</button></div><div class="panel-body found-list">${li.length?li.map(foundRow).join(''):'<div class="empty">No found items for this search.</div>'}<button class="outline" data-openmodal="1" style="width:100%">+ Add a found item</button></div></section></div><div class="help-panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2l9 5v5c0 5-3.4 8.4-9 10-5.6-1.6-9-5-9-10V7zM8 12l3 3 5-6"/></svg><div><strong>How it works</strong><p>Customer voicemails become Lost Reports and photos become Found Items. When a lost item matches a found item, the report moves to Found automatically. You can always change a report with its Lost / Found dropdown.</p></div></div>`}
+function replySeg(vm){const r=(lostMeta[vm]||{}).replied||'',seen=(lostMeta[vm]||{}).seen==='yes';const o=(v,l,c)=>`<button type="button" class="rs ${c}${r===v?' on':''}" data-replied="${esc(vm)}" data-rv="${v}">${l}</button>`;return `<div class="replyseg" role="group" aria-label="Reply status">${o('','Not replied','no')}${o('unsure','Not sure','mid')}${o('yes','Replied','yes')}</div>`}
+async function markSeen(vm){const m=(lostMeta[vm]=lostMeta[vm]||{});if(m.seen==='yes'||!/^[a-zA-Z0-9_-]+$/.test(vm))return;m.seen='yes';try{await api('/api/lost-meta',{vm,seen:'yes'})}catch(ex){m.seen=''}render()}
+function isTrashed(l){return (lostMeta[ck(l)]||{}).trash==='yes'}
+function pickedUp(vm){return (lostMeta[vm]||{}).pickup==='picked_up'}
+function visibleLost(){return lost.filter(l=>!hiddenLost.has(l.id)&&!isTrashed(l))}
+
+let _ckc=null;
+function _phoneDigits(l){const p=realPhone(l.phone)?l.phone:(realPhone(l.caller_id)?l.caller_id:'');return String(p).replace(/\D/g,'').slice(-10)}
+function _realName(n){return n&&!/not recognized|unknown|wireless|caller|^customer$|^private/i.test(n)?String(n).toLowerCase().replace(/[^a-z0-9]/g,''):''}
+function _ckInit(){_ckc=new Map();const byName=new Map();
+  for(const l of lost){const p=_phoneDigits(l),n=_realName(l.name);if(p&&n&&!byName.has(n))byName.set(n,'c'+p)}
+  for(const l of lost){const p=_phoneDigits(l);if(p){_ckc.set(l.id,'c'+p);continue}
+    const n=_realName(l.name);_ckc.set(l.id,n?(byName.get(n)||'n'+n):(l.vm||l.id))}}
+function ck(l){if(!_ckc)_ckInit();return _ckc.get(l.id)||(()=>{const p=_phoneDigits(l);return p?'c'+p:(l.vm||l.id)})()}
+function dateVal(s){const m=/(\d{4})-(\d\d)-(\d\d) (\d\d?):(\d\d) (AM|PM)/.exec(String(s||''));if(!m)return 0;let h=+m[4]%12;if(m[6]==='PM')h+=12;return new Date(+m[1],+m[2]-1,+m[3],h,+m[5]).getTime()}
+function callsOf(key){const seen=new Map();for(const x of lost){if(ck(x)!==key)continue;const v=x.vm||x.id;if(!seen.has(v))seen.set(v,{vm:v,date:x.date,detail:x.detail,trip:x.trip})}return [...seen.values()].sort((a,b)=>dateVal(b.date)-dateVal(a.date))}
+function calledText(key){const c=callsOf(key);if(!c.length)return '';return c.length===1?'called in '+c[0].date:'called in '+c.length+' times · latest '+c[0].date}
+function bestName(g){const ok=g.map(x=>x.name).filter(n=>n&&!/not recognized|unknown|wireless|^customer$/i.test(n));if(!ok.length)return (g[0]&&g[0].name)||'Customer';const cnt={};for(const n of ok)cnt[n]=(cnt[n]||0)+1;return Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0]}
+function uniqItems(items){const s=new Set(),o=[];for(const i of items){const k=String(i.item).toLowerCase()+'|'+(i.color||'');if(s.has(k))continue;s.add(k);o.push(i)}return o}
+function vmGroups(list){const map=new Map();for(const l of list){const k=ck(l);if(!map.has(k))map.set(k,[]);map.get(k).push(l)}return [...map.values()]}
+function itemsBox(items,hitId,am){
+  const many=items.length>4;
+  return `<div class="itemsbox${many?' scrolls':''}">${items.map(i=>{const done=am&&am.has(i.id);return `<span class="itembullet${i.id===hitId?' hit':''}${done?' done':''}">${itemText(i)} <span class="idate">${esc(i.date||'')}</span>${done?' <span class="foundtag">found</span>':''}</span>`}).join('')}</div>${many?`<div class="scrollhint">${items.length} items &mdash; scroll down for all</div>`:''}`;
+}
+
+
+// ---------- Automatic matching: a lost item that matches a found item moves the report to Found ----------
+function autoMap(){
+  // One found item goes to ONE lost item. Oldest lost report is served first, then the next one, and so on.
+  const cands=new Map();
+  for(const x of matches()){ if(x.previous)continue;
+    if(((lostMeta[ck(x.lost)]||{}).rejected||[]).includes(x.found.id))continue;
+    if(!cands.has(x.lost.id))cands.set(x.lost.id,[]);cands.get(x.lost.id).push(x);}
+  const order=lost.filter(l=>cands.has(l.id)).sort((a,b)=>dateVal(a.date)-dateVal(b.date)||String(a.id).localeCompare(String(b.id)));
+  const used=new Set(),m=new Map();
+  for(const l of order){
+    const list=cands.get(l.id).filter(x=>!used.has(x.found.id)).sort((a,b)=>b.score-a.score||dateVal(a.found.date)-dateVal(b.found.date));
+    if(list.length){m.set(l.id,list[0]);used.add(list[0].found.id)}}
+  return m;
+}
+function effStatus(g,am){
+  const meta=lostMeta[ck(g[0])]||{};
+  if(meta.status==='found'||meta.status==='lost')return meta.status;
+  return g.every(i=>am.has(i.id))?'found':'lost';
+}
+function foundGroups(){const am=autoMap();return vmGroups(visibleLost()).filter(g=>effStatus(g,am)==='found')}
+
+let openBus=new Set();
+function foundBus(f){if(!(f.bus||f.ride_time||f.from||f.to))return '';const k='f|'+f.id,open=openBus.has(k);return `<div class="busdd"><button type="button" class="mini" data-bustoggle="${esc(k)}">Bus ${open?'▴':'▾'}</button>${open?tripLine(f):''}</div>`}
+function busRide(key){const open=openBus.has(key);const e=effTrip(key);
+  const inp=(f,ph,w)=>`<input class="busin" data-trip="${f}" data-vm="${esc(key)}" value="${esc(e[f]||'')}" placeholder="${ph}" maxlength="60" style="width:${w}px" aria-label="${ph}">`;
+  return `<div class="busdd"><button type="button" class="mini" data-bustoggle="${esc(key)}">Bus ${open?'▴':'▾'}</button>${open?`<div class="tripbox" style="margin-top:6px">${inp('bus','Bus #',64)} ${inp('ride_time','Time',90)}<div>${inp('from','From',92)} → ${inp('to','To',92)}</div></div>`:''}</div>`}
+function statusCell(l,g,am,st){
+  const vm=ck(l),meta=lostMeta[vm]||{};
+  const my=[...new Map(g.map(i=>am.get(i.id)).filter(Boolean).map(m=>[m.lost.item.toLowerCase()+'|'+m.found.id,m])).values()];
+  const badge=my.length?`<div class="autofound">${my.map(m=>`<div class="small-note">✓ <strong>${esc(m.lost.item)}</strong> → ${esc(m.found.item)}${m.found.photo?` <a href="#" data-zoom="${esc(m.found.photo)}">photo</a>`:''}</div>`).join('')}</div>`:'';//
+  return `<select class="statussel" data-vmstatus="${esc(vm)}" aria-label="Report status"><option value="lost"${st==='lost'?' selected':''}>Lost</option><option value="found"${st==='found'?' selected':''}>Found</option><option value="notfound"${st==='notfound'?' selected':''}>Not found</option></select>${badge}`;
+}
+
+
+
+// ---------- Hebrew (Yiddish) calendar ----------
+const _hEn=new Intl.DateTimeFormat('en-u-ca-hebrew',{day:'numeric',month:'long',year:'numeric'});
+const _hHe=new Intl.DateTimeFormat('he-u-ca-hebrew',{month:'long'});
+function gematria(n){const ones=['','א','ב','ג','ד','ה','ו','ז','ח','ט'],tens=['','י','כ','ל','מ','נ','ס','ע','פ','צ'],hund=['','ק','ר','ש','ת'];
+  let s='';n=Math.floor(n);while(n>=400){s+='ת';n-=400}
+  if(n>=100){s+=hund[Math.floor(n/100)];n%=100}
+  if(n===15)s+='טו';else if(n===16)s+='טז';else{s+=tens[Math.floor(n/10)]+ones[n%10]}
+  return s.length>1?s.slice(0,-1)+'״'+s.slice(-1):s+'׳'}
+function hebParts(d){const p={};for(const x of _hEn.formatToParts(d))p[x.type]=x.value;return {day:+p.day,month:p.month,year:+p.year,he:_hHe.format(d)}}
+function hebLabel(d){const p=hebParts(d);return {en:p.day+' '+p.month+' '+p.year,he:gematria(p.day)+' '+p.he+' '+gematria(p.year%1000)}}
+function dateH(s){const v=dateVal(s);if(!v)return esc(s||'');const h=hebLabel(new Date(v));return '<strong>'+new Date(v).toLocaleDateString('en-US',{weekday:'long'})+'</strong> · '+esc(s)+' <span class="heb">'+esc(h.en)+' · <bdi dir="rtl">'+esc(h.he)+'</bdi></span>'}
+// ---------- Bus / time / route ----------
+function tripLine(o){if(!o)return '';const bus=o.bus,tm=o.ride_time||o.time,fr=o.from,to=o.to;
+  const parts=[bus?'Bus '+bus:'',tm||'',fr&&to?fr+' → '+to:(fr?'from '+fr:(to?'to '+to:''))].filter(Boolean);
+  return parts.length?'<div class="tripline">'+parts.map(esc).join(' · ')+'</div>':''}
+function heardTrip(key){for(const c of callsOf(key)){const t=c.trip;if(t&&(t.bus||t.time||t.from||t.to))return {bus:t.bus,ride_time:t.time,from:t.from,to:t.to}}return {bus:'',ride_time:'',from:'',to:''}}
+function effTrip(key){const m=lostMeta[key]||{},h=heardTrip(key);const pick=f=>m[f]!==undefined?m[f]:h[f];return {bus:pick('bus'),ride_time:pick('ride_time'),from:pick('from'),to:pick('to')}}
+function tripInputs(prefix){return `<div class="fields" style="grid-template-columns:1fr 1fr;margin-top:12px"><div class="field"><label for="${prefix}Bus">Bus number</label><input id="${prefix}Bus" maxlength="20" placeholder="e.g. 12"></div><div class="field"><label for="${prefix}Time">Time on the bus</label><input id="${prefix}Time" maxlength="30" placeholder="e.g. 3:30 PM"></div><div class="field"><label for="${prefix}From">From (where it left)</label><input id="${prefix}From" maxlength="60" placeholder="e.g. Monsey"></div><div class="field"><label for="${prefix}To">To (where it went)</label><input id="${prefix}To" maxlength="60" placeholder="e.g. Brooklyn"></div></div>`}
+function tripVals(p){const g=id=>{const e=$(p+id);return e?e.value.trim():''};return {bus:g('Bus'),ride_time:g('Time'),from:g('From'),to:g('To')}}
+function setTrip(p,o){o=o||{};const s=(id,v)=>{const e=$(p+id);if(e)e.value=v||''};s('Bus',o.bus);s('Time',o.ride_time);s('From',o.from);s('To',o.to)}
+// ---------- Calendar widget under every page ----------
+let hebAnchor=new Date();
+function dayKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function hebMonthDays(anchor){const cur=hebParts(anchor).month;let a=new Date(anchor.getFullYear(),anchor.getMonth(),anchor.getDate());
+  for(let i=0;i<32;i++){const p=new Date(a.getFullYear(),a.getMonth(),a.getDate()-1);if(hebParts(p).month===cur)a=p;else break}
+  const days=[];let d=a;for(let i=0;i<32;i++){if(hebParts(d).month!==cur)break;days.push(d);d=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1)}return days}
+function hebCalHtml(){
+  const days=hebMonthDays(hebAnchor),first=days[0],last=days[days.length-1],p=hebParts(first);
+  const counts={};for(const c of lost){if(isTrashed(c))continue;const v=dateVal(c.date);if(v){const k=dayKey(new Date(v));(counts[k]=counts[k]||new Set()).add(c.vm||c.id)}}
+  const fc={};for(const f of found){const v=dateVal(f.date);if(v){const k=dayKey(new Date(v));fc[k]=(fc[k]||0)+1}}
+  const todayK=dayKey(new Date());
+  let cells='';for(let i=0;i<first.getDay();i++)cells+='<div class="hc empty"></div>';
+  for(const d of days){const k=dayKey(d),hp=hebParts(d),n=(counts[k]?counts[k].size:0),m=fc[k]||0;
+    cells+=`<button type="button" class="hc${k===todayK?' today':''}${(n||m)?' has':''}" data-hebday="${k}" title="${esc(hp.day+' '+hp.month+' '+hp.year)}"><span class="hd">${esc(gematria(hp.day))}</span><span class="gd">${d.getMonth()+1}/${d.getDate()}</span>${(n||m)?`<span class="hn">${n?n+' lost':''}${n&&m?' · ':''}${m?m+' found':''}</span>`:''}</button>`}
+  return `<section class="panel hebcal"><div class="panel-head"><div><h2>Hebrew calendar · <bdi dir="rtl">לוח</bdi></h2><div class="panel-note">${esc(p.month)} ${p.year} · <bdi dir="rtl">${esc(p.he)} ${esc(gematria(p.year%1000))}</bdi> — click a day to see only that day's reports</div></div><div><button class="mini" data-hebnav="-1">◀ Previous month</button> <button class="mini" data-hebnav="0">Today</button> <button class="mini" data-hebnav="1">Next month ▶</button>${search?' <button class="mini" data-hebnav="clear">Show everything</button>':''}</div></div><div class="hgrid">${['Sun','Mon','Tue','Wed','Thu','Fri','Shabbos'].map(x=>`<div class="hh">${x}</div>`).join('')}${cells}</div></section>`}
+
+const WHERES=['Office','Monsey Yard','Brooklyn Yard','On a bus'];
+function whereSel(id,val){const v=String(val||'');const known=WHERES.includes(v);const cur=known?v:((v&&!/^(office \/ location not entered|not entered)$/i.test(v))?'Other':'Office');
+  return `<select id="${id}" class="wheresel">${[...WHERES,'Other'].map(o=>`<option${o===cur?' selected':''}>${o}</option>`).join('')}</select><input id="${id}Other" class="whereother" placeholder="Type where" maxlength="100" value="${cur==='Other'?esc(v):''}"${cur==='Other'?'':' hidden'}>`}
+function whereVal(id){const s=$(id);if(!s)return '';if(s.value!=='Other')return s.value;const o=$(id+'Other');return (o&&o.value.trim())||'Other'}
+function whereInline(f){const v=String(f.where||'');const base=[...WHERES];const extra=v&&!base.includes(v)&&!/^(office \/ location not entered|not entered)$/i.test(v);
+  return `<select class="wheresel" data-foundwhere="${esc(f.id)}" aria-label="Found at">${base.map(o=>`<option${o===v||(o==='Office'&&!extra&&!base.includes(v))?' selected':''}>${o}</option>`).join('')}${extra?`<option selected>${esc(v)}</option>`:''}<option value="__other">Other…</option></select>`}
+function realPhone(p){return String(p||'').replace(/\D/g,'').length>=7}
+function lostItemsOf(vm){return lost.filter(x=>(ck(x))===vm)}
+function contactSummary(vm){const g=lostItemsOf(vm);const l=g[0]||{};return {vm,date:l.date||'',calls:callsOf(vm),name:bestName(g),phone:realPhone(l.phone)?l.phone:(realPhone(l.caller_id)?l.caller_id:''),items:[...new Set(g.map(i=>i.item))],dated:g.map(i=>({id:i.id,item:i.item,date:i.date}))}}
+let openCust=new Set(), contactVm='';
+function custBox(vm,foundItem){
+  const c=contactSummary(vm),key=vm+'|'+(foundItem&&foundItem.id||''),open=openCust.has(key);
+  const am=autoMap();const shown=foundItem?c.dated.filter(d=>am.get(d.id)&&am.get(d.id).found.id===foundItem.id):c.dated;
+  const meta=lostMeta[vm]||{};
+  const badge=meta.pickup==='picked_up'?' <span class="status green">Picked up</span>':'';
+  return `<div class="cust-item"><button type="button" class="custbtn" data-custtoggle="${esc(key)}">${esc(c.name)} ${open?'▴':'▾'}</button> <span class="calledin">${esc(calledText(vm))}</span>${badge}<div class="small-note">lost: ${shown.map(d=>esc(d.item)+' <span class="idate">'+esc(d.date)+'</span>').join(' · ')}</div>${open?`<div class="custdrop">${c.phone?`<button type="button" class="phonebtn" data-contact="${esc(vm)}">📞 ${esc(c.phone)} — open</button>`:`<button type="button" class="phonebtn" data-contact="${esc(vm)}">No phone number — open</button>`}${foundItem?`<button type="button" class="mini" data-reject="${esc(vm)}|${esc(foundItem.id)}">Not a match — not this item</button>`:`<button type="button" class="mini" data-unfound="${esc(vm)}">Not found — back to Lost Reports</button>`}</div>`:''}</div>`;
+}
+function contactHtml(){
+  const vm=contactVm,c=contactSummary(vm),meta=lostMeta[vm]||{};
+  const am=autoMap();const hit=lostItemsOf(vm).map(i=>am.get(i.id)).filter(Boolean);
+  const fmsg=hit.length?hit[0].found.item:(c.items[0]||'item');
+  const pick=meta.pickup==='picked_up';
+  const msg=`Hello ${c.name}, this is Monsey Trails Lost & Found. We have your ${fmsg}. Please call us to arrange pickup.`;
+  const telHref=c.phone?'tel:'+String(c.phone).replace(/[^\d+]/g,''):'';
+  const smsHref=c.phone?'sms:'+String(c.phone).replace(/[^\d+]/g,'')+'?body='+encodeURIComponent(msg):'';
+  const mailHref=meta.email?'mailto:'+encodeURIComponent(meta.email)+'?subject='+encodeURIComponent('Your lost item — Monsey Trails')+'&body='+encodeURIComponent(msg):'';
+  const row=(label,kind,key,href,extra)=>`<div class="cg-row">${href?`<a class="primary" data-contactlog="${kind}" href="${esc(href)}" style="padding:10px 14px">${label}</a>`:`<button type="button" class="primary" data-contactlog="${kind}" data-nohref="1" style="padding:10px 14px">${label}</button>`}<div class="cnt"><strong>${meta[key]||0}</strong> time${(meta[key]||0)===1?'':'s'} ${extra||''}</div><button type="button" class="mini" data-contactminus="${kind}" title="Remove the last one">−1</button></div>`;
+  const last=k=>{const h=(meta.history||[]).find(x=>x.type===k);return h?` · last ${esc(h.at)}`:''};
+  return `<div class="modal" role="dialog" aria-modal="true" style="max-width:640px"><div class="modal-top"><h2>${esc(c.name)}</h2><button type="button" class="close" data-closecontact="1" aria-label="Close">×</button></div><div class="modalbody">
+  <div style="font-size:20px;font-weight:800">${c.phone?esc(c.phone):'No phone number on this report'}</div>
+  <div class="small-note" style="font-size:13px"><strong>Called in ${c.calls.length} time${c.calls.length===1?'':'s'}</strong>${c.phone?' from this number':''}:<br>${c.calls.map(x=>dateH(x.date)).join('<br>')}</div>
+  <div class="small-note">Lost: ${c.dated.map(d=>{const f=am.has(d.id);return `<span style="${f?'text-decoration:line-through;opacity:.6':''}">${esc(d.item)} <span class="idate">${esc(d.date)}</span></span>${f?` <span class="foundtag">found: ${esc(am.get(d.id).found.item)}</span>`:''}`}).join(' · ')}</div>
+  <div class="cg">
+   <div class="cg-row"><strong>Pickup</strong><div class="seg"><button type="button" class="${pick?'':'on'}" data-pickup="not_picked_up">Not picked up</button><button type="button" class="${pick?'on':''}" data-pickup="picked_up">Picked up</button></div>${meta.pickup_at?`<span class="small muted">${esc(meta.pickup_at)}</span>`:''}</div>
+   ${row('📞 Call customer','call','calls',telHref,'called'+last('call'))}
+   ${row('💬 Send text message','text','texts',smsHref,'texted'+last('text'))}
+   <div class="cg-row"><div class="field" style="flex:1;min-width:200px"><label for="ctEmail">Customer email</label><input id="ctEmail" type="email" value="${esc(meta.email||'')}" placeholder="name@example.com" data-contactemail="1"></div></div>
+   ${row('✉️ Send email','email','emails',mailHref,'emailed'+last('email'))}
+   <div class="field"><label for="ctNote">Note</label><input id="ctNote" value="${esc(meta.note||'')}" maxlength="300" placeholder="Anything to remember about this customer" data-contactnote="1"></div>
+  </div>
+  <div class="hist">${(meta.history||[]).slice(0,8).map(h=>`${esc(h.at)} — ${h.type==='call'?'called':h.type==='text'?'texted':'emailed'}`).join('<br>')}</div>
+  <div class="small-note" style="margin-top:10px">Call, text and email open your phone or email app. Each press is counted automatically; use −1 if you pressed by mistake.</div>
+  </div></div>`;
+}
+function openContact(vm){contactVm=vm;let w=$('contactWrap');if(!w){w=document.createElement('div');w.id='contactWrap';w.className='modal-backdrop';document.body.appendChild(w);w.addEventListener('click',e=>{if(e.target===w)closeContact()})}w.innerHTML=contactHtml();w.classList.add('open')}
+function refreshContact(){const w=$('contactWrap');if(w&&w.classList.contains('open'))w.innerHTML=contactHtml()}
+function closeContact(){const w=$('contactWrap');if(w)w.classList.remove('open');render()}
+const NF_DAYS=30;
+function lastActivity(g){let v=0;for(const c of callsOf(ck(g[0])))v=Math.max(v,dateVal(c.date));for(const i of g)v=Math.max(v,dateVal(i.date));return v}
+function isNotFound(g,am){if(effStatus(g,am)!=='lost')return false;const nf=(lostMeta[ck(g[0])]||{}).nf;if(nf==='yes')return true;if(nf==='no')return false;const v=lastActivity(g);return !!v&&(Date.now()-v)>NF_DAYS*86400000}
+function lostGroupsNow(){const am=autoMap();return vmGroups(visibleLost()).filter(g=>effStatus(g,am)==='lost'&&!isNotFound(g,am))}
+function notFoundGroups(){const am=autoMap();return vmGroups(visibleLost()).filter(g=>isNotFound(g,am))}
+function autoMatchList(){const am=autoMap();return [...am.values()].filter(m=>{const g=lost.filter(x=>(ck(x))===(ck(m.lost)));return effStatus(g,am)==='found'&&!hiddenLost.has(m.lost.id)})}
+function autoMatchView(){const arr=autoMatchList().filter(m=>filterStr(m.lost.item,m.lost.name,m.lost.phone,m.found.item,m.found.where));
+  return `${searchbar()}<div class="layout-list">${arr.length?arr.slice(0,matchLimit).map(m=>`<section class="panel"><div class="panel-body">${matchCard(m)}</div></section>`).join(''):'<section class="panel empty"><h3>No matches yet</h3><p>When a customer’s lost item matches something in Found Items, it shows here and moves to Found Items.</p></section>'}</div>`}
+function custSel(vm,st){return `<select class="statussel" data-vmstatus="${esc(vm)}" aria-label="Report status"><option value="lost"${st==='lost'?' selected':''}>Lost</option><option value="found"${st==='found'?' selected':''}>Found</option></select>`}
+function lostRow(g,am,st){const l=g[0];const ids=g.map(x=>x.id).join(',');
+   const mt=lostMeta[ck(l)]||{},rcls=mt.replied==='yes'?'rd-done':mt.replied==='unsure'?'rd-unsure':mt.seen==='yes'?'rd-open':'';
+   return `<tr class="${rcls}"><td>${itemsBox(g,null,am)}</td><td><button type="button" class="custbtn" data-contact="${esc(ck(l))}">${esc(bestName(g))}</button> <span class="calledin">${esc(calledText(ck(l)))}</span>${realPhone(l.phone)?`<div class="phone-line"><a class="phonecall" data-calllog="${esc(ck(l))}" href="tel:${esc(String(l.phone).replace(/[^\d+]/g,''))}" title="Call this customer (counts as replied)">${esc(l.phone)}</a></div>`:''}${l.caller_id&&l.caller_id!==l.phone&&realPhone(l.caller_id)?`<div class="small-note">Calling from ${esc(l.caller_id)}</div>`:''}</td><td><div class="rdate">${dateH((callsOf(ck(l))[0]||l).date)}<span class="vm-count">${g.length} item${g.length===1?'':'s'}</span></div>${busRide(ck(l))}<div style="margin-top:7px"><button class="mini" data-togglemsg="${esc(ck(l))}">${openMsgs.has(ck(l))?'Hide message':'Show message'}</button></div>${openMsgs.has(ck(l))?callsOf(ck(l)).map(c=>`<div class="small-note vmtext"><strong>${dateH(c.date)}</strong><br>${esc(c.full||c.detail).replace(/\n/g,'<br>')}</div>`).join(''):''}</td><td>${st==='trash'?'<span class="small-note">In trash</span>':statusCell(l,g,am,st)+replySeg(ck(l))}</td><td>${st==='trash'?`<button class="mini" data-restore="${esc(ck(l))}">Restore</button>`:` <button class="mini" data-trash="${esc(ck(l))}">Trash</button>`}</td></tr>`}
+function lostPanel(title,note,rows,empty){return `<section class="panel"><div class="panel-head"><div><h2>${title}</h2><div class="panel-note">${note}</div></div></div><div class="table-scroller"><table class="datatable"><thead><tr><th>Items</th><th>Customer / Phone</th><th>Report</th><th>Status</th><th></th></tr></thead><tbody>${rows.length?rows.join(''):`<tr><td colspan="5" class="noresults">${empty}</td></tr>`}</tbody></table></div></section>`}
+function lostTable(){
+  const am=autoMap();
+  const groups=lostGroupsNow().filter(g=>g.some(l=>filterStr(l.item,l.color,l.name,l.phone,l.caller_id,l.detail,l.date)));
+  return `${searchbar()}${lostPanel('Customer lost reports','One box per voicemail. When an item matches something found, the report moves to Found Items.',groups.map(g=>lostRow(g,am,'lost')),'No lost reports.')}<div class="caption">Trash moves a whole report to the Trash tab. Nothing is ever deleted; you can restore it any time.</div>`}
+function notFoundTable(){
+  const am=autoMap();
+  const groups=notFoundGroups().filter(g=>g.some(l=>filterStr(l.item,l.color,l.name,l.phone,l.caller_id,l.detail,l.date)));
+  return `${lostPanel('Not found','Lost reports with no match after '+NF_DAYS+' days. They work like Lost Reports: search them, open the customer, see the message. If a matching item is found later, the report moves to Found Items by itself. To bring one back to Lost Reports, change its status to Lost.',groups.map(g=>lostRow(g,am,'notfound')),'Nothing here. Reports move here when no match is found after '+NF_DAYS+' days.')}`}
+function lastVmActivity(vm){let v=0;for(const c of callsOf(vm))v=Math.max(v,dateVal(c.date));return v}
+function isDP(f,byF){if(f.dp==='yes')return true;if(f.dp==='no')return false;let v=dateVal(f.date);for(const vm of (byF.get(f.id)||[]))v=Math.max(v,lastVmActivity(vm));return !!v&&(Date.now()-v)>NF_DAYS*864e5}
+function foundCtx(){
+  const am=autoMap(),byF=new Map(),retBy=new Set();
+  for(const m of am.values()){const vm=ck(m.lost);if(hiddenLost.has(m.lost.id)||isTrashed(m.lost)||(lostMeta[vm]||{}).status==='lost')continue;const k=m.found.id;
+    if(pickedUp(vm)){retBy.add(k);continue}
+    if(!byF.has(k))byF.set(k,new Set());byF.get(k).add(vm)}
+  const active=[],dpl=[];
+  for(const f of found){if(retBy.has(f.id)&&!byF.has(f.id))continue;(isDP(f,byF)?dpl:active).push(f)}
+  const manual=vmGroups(visibleLost()).filter(g=>effStatus(g,am)==='found'&&!g.some(i=>am.has(i.id))&&!pickedUp(ck(g[0])));
+  return {am,byF,active,dpl,manual}
+}
+function returnedGroups(){const am=autoMap();return vmGroups(visibleLost()).filter(g=>effStatus(g,am)==='found'&&pickedUp(ck(g[0]))).sort((a,b)=>dateVal((lostMeta[ck(b[0])]||{}).pickup_at)-dateVal((lostMeta[ck(a[0])]||{}).pickup_at))}
+function trashedGroups(){return vmGroups(lost.filter(l=>!hiddenLost.has(l.id)&&isTrashed(l)))}
+function matchedFounds(g,am){const seen=new Map();for(const i of g){const m=am.get(i.id);if(m&&!seen.has(m.found.id))seen.set(m.found.id,m.found)}return [...seen.values()]}
+function returnedTable(){
+  const am=autoMap();
+  const groups=returnedGroups().filter(g=>g.some(l=>filterStr(l.item,l.color,l.name,l.phone,l.caller_id,l.detail,l.date,(lostMeta[ck(l)]||{}).pickup_at,matchedFounds(g,am).map(f=>f.item+' '+f.color).join(' '))));
+  const rows=groups.map(g=>{const l=g[0],vm=ck(l),meta=lostMeta[vm]||{},fs=matchedFounds(g,am);
+    return `<tr><td>${fs.length?fs.map(f=>`<div class="itemcell">${pic(f)}<div>${itemText(f)}</div></div>`).join(''):'<span class="small-note">Marked found by hand</span>'}</td><td><button type="button" class="custbtn" data-contact="${esc(vm)}">${esc(bestName(g))}</button> <span class="calledin">${esc(calledText(vm))}</span>${realPhone(l.phone)?`<div class="phone-line">${esc(l.phone)}</div>`:''}</td><td>${itemsBox(g,null,am)}</td><td>${meta.pickup_at?dateH(meta.pickup_at):'—'}</td><td><button class="mini" data-unreturn="${esc(vm)}">Not picked up after all</button></td></tr>`}).join('');
+  return `<section class="panel"><div class="panel-head"><div><h2>Returned items</h2><div class="panel-note">Customers who picked up their item. Press “Not picked up after all” to move one back to Found Items.</div></div></div><div class="table-scroller"><table class="datatable"><thead><tr><th>Item returned</th><th>Customer / Phone</th><th>Lost report</th><th>Picked up</th><th></th></tr></thead><tbody>${rows||'<tr><td colspan="5" class="noresults">Nothing returned yet. When you press “Picked up” on a customer, it moves here.</td></tr>'}</tbody></table></div></section>`}
+function trashTable(){
+  const am=autoMap();
+  const groups=trashedGroups().filter(g=>g.some(l=>filterStr(l.item,l.color,l.name,l.phone,l.caller_id,l.detail,l.date)));
+  return lostPanel('Trash','Reports you moved to Trash. They are not matched and not counted anywhere. Nothing is deleted: press Restore to bring one back.',groups.map(g=>lostRow(g,am,'trash')),'Trash is empty.')}
+function foundTable(mode){
+  mode=mode||'found';
+  const {am,byF,active,dpl,manual:man}=foundCtx();
+  const custText=vms=>[...vms].map(vm=>{const c=contactSummary(vm);return c.name+' '+c.phone+' '+c.items.join(' ')}).join(' ');
+  const list=(mode==='dp'?dpl:active).filter(f=>filterStr(f.item,f.color,f.where,f.date,f.bus,f.from,f.to,f.ride_time,custText(byF.get(f.id)||[])));
+  const manual=mode==='dp'?[]:man.filter(g=>g.some(l=>filterStr(l.item,l.name,l.phone,l.caller_id)));
+  const cell=f=>{const keys=[...(byF.get(f.id)||[])].sort((a,b)=>dateVal((callsOf(b)[0]||{}).date)-dateVal((callsOf(a)[0]||{}).date));const mk='more|'+f.id,all=openCust.has(mk),shown=all?keys:keys.slice(0,3);return (shown.map(k=>custBox(k,f)).join('')||'<span class="small-note">—</span>')+(keys.length>3?`<button type="button" class="mini" data-custtoggle="${esc(mk)}">${all?'Show fewer':'Show '+(keys.length-3)+' more customers'}</button>`:'')};
+  const title=mode==='dp'?'Didn’t pick up':'Items found on the buses';
+  const note=mode==='dp'?'Found items nobody picked up within '+NF_DAYS+' days. They work like Found Items: search, open the customer, edit. If a customer calls and matches one, or you press Back to Found, it returns to Found Items.':'When a lost report matches an item, the customer\'s name shows here. Click the name, then the phone number. After '+NF_DAYS+' days without pickup, an item moves to Didn’t Pick Up.';
+  const flagBtn=f=>mode==='dp'?`<button class="mini" data-fflag="${esc(f.id)}" data-dp="no">Back to Found</button>`:`<button class="mini" data-fflag="${esc(f.id)}" data-dp="yes">Didn’t pick up</button>`;
+  return `<section class="panel"><div class="panel-head"><div><h2>${title}</h2><div class="panel-note">${note}</div></div>${mode==='dp'?'':'<button class="mini" data-openmodal="1">+ Add photo</button>'}</div><div class="table-scroller"><table class="datatable"><thead><tr><th>Photo & item</th><th>Found at</th><th>Date</th><th>Customer</th><th>Manage</th></tr></thead><tbody>${list.map(f=>`<tr><td><div class="itemcell">${pic(f)}<div>${itemText(f)}${foundBus(f)}</div></div></td><td>${whereInline(f)}</td><td>${dateH(f.date)}</td><td>${cell(f)}</td><td>${recognitionBadge(f)}${wikiEvidence(f)}<button class="mini" data-edit="${esc(f.id)}">Edit item</button> ${f.photo?`<button class="mini" data-reanalyze="${esc(f.id)}">Recheck photo</button>`:''} ${flagBtn(f)} <button class="mini" data-archive="${esc(f.id)}">Archive</button></td></tr>`).join('')}${manual.map(g=>{const vm=ck(g[0]);return `<tr><td>${itemsBox(g,null,am)}</td><td>—</td><td>${esc(g[0].date)}</td><td>${custBox(vm,null)}</td><td><span class="small-note">Customer report marked Found by hand</span></td></tr>`}).join('')}${list.length||manual.length?'':`<tr><td colspan="5" class="noresults">${mode==='dp'?'Nothing here. Found items move here after '+NF_DAYS+' days without pickup.':'No found items match this search.'}</td></tr>`}</tbody></table></div><div class="caption">Verify close-looking objects before returning property. You can correct a name or color with Edit.</div></section>`}
+const titles={overview:['Everything in one place','Connect customer lost reports with photos of the items found on your buses.'],lost:['Lost reports',''],found:['Found items','Take a photo; the local AI estimates the item and color automatically, with better closed-phone recognition and multicolor styling.'],notfound:['Not found','Lost reports with no match after 30 days.'],returned:['Returned','Items picked up by customers.'],dp:['Didn\'t pick up','Found items nobody picked up in 30 days.'],trash:['Trash','Reports moved to trash.'],matches:['Matched','Items you matched to a customer report. Press "I have it" once the item is in your hands.']};
+function render(){const ms=pairs;$('countLost').textContent=vmGroups(visibleLost()).length;$('countFound').textContent=found.length;$('countMatches').textContent=autoMatchList().length;{const e1=$('lost-count2'),e2=$('found-count2'),e3=$('match-count2'),e4=$('nf-count2');if(e4)e4.textContent=notFoundGroups().length;{const fc=foundCtx();if($('dp-count2'))$('dp-count2').textContent=fc.dpl.length;if($('ret-count2'))$('ret-count2').textContent=returnedGroups().length;if($('trash-count2'))$('trash-count2').textContent=trashedGroups().length;if(e2)e2.textContent=fc.active.length+fc.manual.length}if(e1)e1.textContent=lostGroupsNow().length;if(e3)e3.textContent=autoMatchList().length}$('lost-nav-count').textContent=vmGroups(visibleLost()).length;$('found-nav-count').textContent=found.length;document.querySelectorAll('[data-tab]').forEach(b=>{let active=b.dataset.tab===currentTab;b.classList.toggle('active',active);b.setAttribute('aria-current',active?'page':'false')});$('pageTitle').textContent=titles[currentTab][0];$('pageSubtitle').textContent=titles[currentTab][1];$('breadcrumb').textContent=({overview:'Overview',lost:'Lost Reports',found:'Found Items',returned:'Returned',notfound:'Not Found',dp:'Didn\'t Pick Up',trash:'Trash',matches:'Matches'})[currentTab];$('view').innerHTML=({overview:overview,lost:lostTable,found:foundTable,returned:returnedTable,notfound:notFoundTable,dp:()=>foundTable('dp'),trash:trashTable,matches:lostTable})[currentTab]();$('hebcal').innerHTML=hebCalHtml();$('addFound').textContent=(currentTab==='found'||currentTab==='dp')?'+ Add Found Item':'+ Add Lost Item';$('addFound').style.display=(currentTab==='trash'||currentTab==='returned')?'none':'';}
+function notify(message){const t=$('toast');t.textContent=message;t.classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>t.classList.remove('show'),3600)}
+function go(tab){if(!titles[tab])return;currentTab=tab;matchLimit=30;render();window.scrollTo({top:0,behavior:'smooth'})}
+function openModal(){photoData='';selectedUploadId='';$('saveFound').style.display='none';$('photoInput').value='';$('photoHeader').textContent='Choose up to 10 pictures together';$('photoHelp').textContent='Photo is saved first, then analyzed automatically';$('uploadZone').querySelectorAll('img').forEach(el=>el.remove());$('locWrap').innerHTML=whereSel('locationInput','Office');setTrip('pf',{});$('modalWrap').classList.add('open')}
+function closeModal(){$('modalWrap').classList.remove('open')}
+
+async function api(path, data){
+  const opts={method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)};
+  const r=await fetch(path,opts);const v=await r.json();
+  if(!r.ok)throw Error(v.error||'Request failed');return v;
+}
+async function reloadRecords(quiet=false){
+  try{
+    const r=await fetch('/api/state',{cache:'no-store'});
+    const d=await r.json();if(!r.ok)throw Error(d.error||'Unable to read records');
+    const sig=JSON.stringify([d.lost,d.found,d.confirmed,d.hidden_lost,d.voicemails_seen,d.pairs,d.lost_meta]);
+    const same=(sig===lastSig);lastSig=sig;
+    lost=d.lost||[];found=d.found||[];_ckc=null;pairs=d.pairs||[];lostMeta=d.lost_meta||{};
+    confirmed=new Set(d.confirmed||[]);hiddenLost=new Set(d.hidden_lost||[]);
+    integrationFound=!!d.integrated;
+    const info=document.querySelector('.sidebar-bottom');
+    if(info){info.innerHTML='<strong><span class="dot"></span>Local dashboard · Google photo AI</strong>'+(integrationFound?('Live read-only link to Intermedia voicemail records. '+d.voicemails_seen+' messages available.'):'Intermedia records not found automatically. Photo upload still works; ask ChatGPT to set the listener folder path.');}
+    if(!same||!quiet)render();
+    if(!quiet)notify('Records loaded. '+lost.length+' extracted lost-item rows.');
+  }catch(e){if(!quiet)alert('Could not refresh: '+e.message);}
+}
+
+document.addEventListener('click',async e=>{
+  const n=e.target.closest('[data-tab]');if(n){go(n.dataset.tab);return}
+  const a=e.target.closest('[data-go]');if(a){go(a.dataset.go);return}
+  if(e.target.closest('[data-openmodal]')){openModal();return}
+  const recheck=e.target.closest('[data-reanalyze]');
+  if(recheck){
+    if(!confirm('Send this found-item photo to Google Gemini again? Its suggested name and color may change.'))return;
+    try{await api('/api/reanalyze-found',{id:recheck.dataset.reanalyze});
+        await reloadRecords(true);notify('Photo saved and queued for new Gemini recognition.');}
+    catch(ex){alert('Could not recheck photo: '+ex.message)}return;
+  }
+  const edt=e.target.closest('[data-edit]');
+  if(edt){const rec=found.find(f=>f.id===edt.dataset.edit);if(!rec)return;
+    editingFoundId=rec.id;$('editItem').value=rec.item==='Analyzing photo…'?'':rec.item;$('edTrip').innerHTML='<div class="field" style="margin-top:12px"><label>Found at</label>'+whereSel('edWhere',rec.where)+'</div>'+tripInputs('ed');setTrip('ed',rec);
+    $('editColor').value=[...$('editColor').options].some(o=>o.value===rec.color)?rec.color:'';$('editWrap').classList.add('open');$('editItem').focus();return;}
+  const c=e.target.closest('[data-confirm]');
+  if(c){const key=c.dataset.confirm;const yes=!confirmed.has(key);
+    if(yes&&!confirm('Mark this possible match as confirmed? Please verify ownership before returning any item.'))return;
+    try{await api('/api/confirm',{key,confirmed:yes});await reloadRecords(true);notify(yes?'Match link saved. Verify ownership separately before returning.':'Confirmation removed.');}
+    catch(ex){alert(ex.message)}return}
+  const bt=e.target.closest('[data-bustoggle]');if(bt){const k=bt.dataset.bustoggle;if(openBus.has(k))openBus.delete(k);else{openBus.add(k);if(!k.startsWith('f|'))markSeen(k)}render();return}
+  if(e.target.closest('[data-closelost]')){$('lostWrap').classList.remove('open');return}
+  if(e.target.closest('#lxSave')){const items=$('lxItems').value.trim();if(!items){alert('Type what was lost.');return}
+    try{await api('/api/lost-add',{name:$('lxName').value.trim(),phone:$('lxPhone').value.trim(),items,note:$('lxNote').value.trim(),...tripVals('lx')});
+      $('lostWrap').classList.remove('open');await reloadRecords(true);go('lost');notify('Lost report saved.');}
+    catch(ex){alert('Could not save: '+ex.message)}return}
+  const hn=e.target.closest('[data-hebnav]');
+  if(hn){const v=hn.dataset.hebnav;if(v==='clear'){search='';$('itemSearch').value='';render();return}
+    if(v==='0'){hebAnchor=new Date()}else{const days=hebMonthDays(hebAnchor);const base=v==='1'?days[days.length-1]:days[0];hebAnchor=new Date(base.getFullYear(),base.getMonth(),base.getDate()+(v==='1'?1:-1))}
+    $('hebcal').innerHTML=hebCalHtml();return}
+  const hd=e.target.closest('[data-hebday]');
+  if(hd){search=hd.dataset.hebday;$('itemSearch').value=search;render();window.scrollTo({top:0,behavior:'smooth'});return}
+  const ct=e.target.closest('[data-custtoggle]');if(ct){const k=ct.dataset.custtoggle;if(openCust.has(k))openCust.delete(k);else openCust.add(k);render();return}
+  const oc=e.target.closest('[data-contact]');if(oc){openContact(oc.dataset.contact);return}
+  if(e.target.closest('[data-closecontact]')){closeContact();return}
+  const rj=e.target.closest('[data-reject]');
+  if(rj){const [vmk,fid]=rj.dataset.reject.split('|');try{await api('/api/lost-meta',{vm:vmk,reject:fid});await reloadRecords(true);notify('Removed — that customer is no longer matched to this item.')}catch(ex){alert(ex.message)}return}
+  const uf=e.target.closest('[data-unfound]');
+  if(uf){try{await api('/api/lost-meta',{vm:uf.dataset.unfound,status:'lost'});await reloadRecords(true);notify('Moved back to Lost Reports.')}catch(ex){alert(ex.message)}return}
+  const pk=e.target.closest('[data-pickup]');
+  if(pk){try{await api('/api/lost-meta',{vm:contactVm,pickup:pk.dataset.pickup});await reloadRecords(true);refreshContact();}catch(ex){alert(ex.message)}return}
+  const cm=e.target.closest('[data-contactminus]');
+  if(cm){try{await api('/api/lost-meta',{vm:contactVm,log:cm.dataset.contactminus,delta:-1});await reloadRecords(true);refreshContact();}catch(ex){alert(ex.message)}return}
+  const cl=e.target.closest('[data-contactlog]');
+  if(cl){const kind=cl.dataset.contactlog;
+    if(cl.dataset.nohref){alert(kind==='email'?'Type the customer email first, then press Send email.':'This report has no phone number.');return}
+    api('/api/lost-meta',{vm:contactVm,log:kind}).then(()=>reloadRecords(true)).then(refreshContact).catch(()=>{});return}
+  if(e.target.closest('[data-closematch]')){closeMatchPopup();return}
+  if(e.target.closest('[data-closetext]')){$('textWrap').classList.remove('open');return}
+  if(e.target.closest('[data-opentext]')){closeModal();openTextModal();return}
+  if(e.target.closest('#txSave')){
+    const item=$('txItem').value.trim();if(!item){alert('Type what was found.');return}
+    try{await api('/api/found-text',{item,color:$('txColor').value,where:whereVal('txWhere'),note:$('txNote').value.trim(),...tripVals('tx')});
+      $('textWrap').classList.remove('open');await reloadRecords(true);go('found');notify('Found item saved (no picture).');}
+    catch(ex){alert('Could not save: '+ex.message)}return}
+  const dp=e.target.closest('[data-dopair]');
+  if(dp){const f=found.find(x=>x.id===dp.dataset.dopair),l=lost.find(x=>x.id===dp.dataset.lostid)||lost.find(x=>(ck(x))===matchVm);if(!f||!l)return;
+    try{await api('/api/pair',{vm:matchVm,lost_id:l.id,found_id:f.id,
+        lost:{item:l.item,color:l.color,name:l.name,phone:l.phone,caller_id:l.caller_id,date:l.date},
+        found:{item:f.item,color:f.color,where:f.where,date:f.date,photo:f.photo||''}});
+      const w=$('matchWrap');if(w)w.classList.remove('open');await reloadRecords(true);go('matches');notify('Matched. Check both sides, then press “I have it”.');}
+    catch(ex){alert('Could not match: '+ex.message)}return}
+  const ps=e.target.closest('[data-pairstatus]');
+  if(ps){try{await api('/api/pair-status',{id:ps.dataset.pairstatus,status:ps.dataset.to});await reloadRecords(true);notify(ps.dataset.to==='confirmed'?'Confirmed — you have it.':'Moved back to waiting.');}catch(ex){alert(ex.message)}return}
+  const pr=e.target.closest('[data-pairremove]');
+  if(pr){if(!confirm('Remove this match? The lost report and found item stay as they are.'))return;
+    try{await api('/api/pair-remove',{id:pr.dataset.pairremove});await reloadRecords(true);notify('Match removed.');}catch(ex){alert(ex.message)}return}
+  if(e.target.closest('[data-viewlost]')){go('lost');return}
+  const zm=e.target.closest('[data-zoom]');
+  if(zm){const lb=document.createElement('div');lb.className='lightbox';lb.innerHTML='<img alt="Found item photo" src="'+esc(zm.dataset.zoom)+'">';const close=()=>{lb.remove();document.removeEventListener('keydown',esc2)};const esc2=k=>{if(k.key==='Escape')close()};lb.addEventListener('click',close);document.addEventListener('keydown',esc2);document.body.appendChild(lb);return}
+  if(e.target.closest('[data-moremat]')){matchLimit+=30;render();return}
+  const tm=e.target.closest('[data-togglemsg]');
+  if(tm){const k=tm.dataset.togglemsg;if(openMsgs.has(k))openMsgs.delete(k);else{openMsgs.add(k);markSeen(k)}render();return}
+  const pcall=e.target.closest('[data-calllog]');
+  if(pcall){const vm=pcall.dataset.calllog;api('/api/lost-meta',{vm,log:'call'}).then(()=>reloadRecords(true)).catch(ex=>alert(ex.message));return}
+  const rp=e.target.closest('[data-replied]');
+  if(rp){const vm=rp.dataset.replied,m=(lostMeta[vm]=lostMeta[vm]||{}),to=rp.dataset.rv;try{await api('/api/lost-meta',{vm,replied:to,seen:'yes'});m.replied=to;m.seen='yes';render()}catch(ex){alert(ex.message)}return}
+  const tr=e.target.closest('[data-trash],[data-restore],[data-unreturn],[data-fflag]');
+  if(tr){try{
+    if(tr.dataset.trash!==undefined){const vm=tr.dataset.trash;await api('/api/lost-meta',{vm,trash:'yes'});(lostMeta[vm]=lostMeta[vm]||{}).trash='yes';notify('Moved to Trash. You can restore it from the Trash tab.')}
+    else if(tr.dataset.restore!==undefined){const vm=tr.dataset.restore;await api('/api/lost-meta',{vm,trash:''});(lostMeta[vm]=lostMeta[vm]||{}).trash='';notify('Restored.')}
+    else if(tr.dataset.unreturn!==undefined){const vm=tr.dataset.unreturn;await api('/api/lost-meta',{vm,pickup:'not_picked_up'});const m=(lostMeta[vm]=lostMeta[vm]||{});m.pickup='not_picked_up';m.pickup_at='';notify('Moved back to Found Items.')}
+    else{await api('/api/found-flag',{id:tr.dataset.fflag,dp:tr.dataset.dp});const f=found.find(x=>x.id===tr.dataset.fflag);if(f)f.dp=tr.dataset.dp;notify(tr.dataset.dp==='yes'?'Moved to Didn’t Pick Up.':'Moved back to Found Items.')}
+    render()}catch(ex){alert(ex.message)}return}
+  const delvm=e.target.closest('[data-delete-vm]');
+  if(delvm){if(!confirm('Hide this whole voicemail box in the trial? The original voicemail remains unchanged.'))return;
+    try{for(const id of delvm.dataset.deleteVm.split(','))await api('/api/hide-lost',{id,hidden:true});await reloadRecords(true);notify('Voicemail hidden in the trial only.');}
+    catch(ex){alert(ex.message)}return;}
+  const del=e.target.closest('[data-delete]');
+  if(del){if(!confirm('Hide this lost-report row in the trial? The original voicemail remains unchanged.'))return;
+    try{await api('/api/hide-lost',{id:del.dataset.delete,hidden:true});await reloadRecords(true);notify('Row hidden in the trial only.');}
+    catch(ex){alert(ex.message)}return;}
+  const arc=e.target.closest('[data-archive]');
+  if(arc){if(!confirm('Archive this found-item record from the trial? Its saved photo will be retained.'))return;
+    try{await api('/api/archive-found',{id:arc.dataset.archive,archived:true});await reloadRecords(true);notify('Found item archived.');}
+    catch(ex){alert(ex.message)}return;}
+  if(e.target.closest('[data-restore-hidden]')){
+    if(!confirm('Restore all hidden lost-report rows in this trial?'))return;
+    try{for(const id of [...hiddenLost])await api('/api/hide-lost',{id,hidden:false});await reloadRecords(true);notify('Hidden rows restored.');}
+    catch(ex){alert(ex.message)}return;}
+});
+$('pfTrip').innerHTML=tripInputs('pf');$('locWrap').innerHTML=whereSel('locationInput','Office');
+$('addFound').addEventListener('click',()=>{if(currentTab==='found'||currentTab==='dp')openModal();else openLostModal()});
+$('itemSearch').addEventListener('input',e=>{search=e.target.value;matchLimit=30;clearTimeout(render.t);render.t=setTimeout(render,200)});
+function closeEdit(){$('editWrap').classList.remove('open');editingFoundId=null}
+$('closeEdit').addEventListener('click',closeEdit);
+$('cancelEdit').addEventListener('click',closeEdit);
+$('editWrap').addEventListener('click',e=>{if(e.target===$('editWrap'))closeEdit()});
+$('saveEdit').addEventListener('click',async()=>{
+  if(!editingFoundId)return;let item=$('editItem').value.trim();if(!item){alert('Enter the correct item name.');return;}
+  let id=editingFoundId;let button=$('saveEdit');button.disabled=true;
+  try{await api('/api/edit-found',{id,item,color:$('editColor').value,where:whereVal('edWhere'),...tripVals('ed')});closeEdit();await reloadRecords(true);notify('Correction saved. Matching was updated.');}
+  catch(ex){alert('Could not save: '+ex.message)}finally{button.disabled=false}
+});
+$('closeModal').addEventListener('click',closeModal);
+$('cancelModal').addEventListener('click',closeModal);
+$('modalWrap').addEventListener('click',e=>{if(e.target===$('modalWrap'))closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeEdit();const w=$('matchWrap');if(w&&w.classList.contains('open'))closeMatchPopup();const x=$('textWrap');if(x)x.classList.remove('open');const lw=$('lostWrap');if(lw)lw.classList.remove('open');const cw=$('contactWrap');if(cw&&cw.classList.contains('open'))closeContact()}});
+
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.tab)));
+async function prepareGeminiPhoto(f){
+  if(f.size>50*1024*1024)throw Error('This picture is over 50 MB.');
+  if(!/^image\/(jpeg|png|webp|gif)$/.test(f.type))throw Error('JPG, PNG, or WebP required; convert HEIC first.');
+  const url=URL.createObjectURL(f);
+  let image;
+  try{
+    image=await new Promise((resolve,reject)=>{
+      const im=new Image();im.onload=()=>resolve(im);
+      im.onerror=()=>reject(Error('Could not read photo '+f.name));im.src=url;
+    });
+  }finally{URL.revokeObjectURL(url)}
+  if(image.naturalWidth*image.naturalHeight>65_000_000)throw Error('Photo too large in pixels.');
+  let limit=2500,quality=.92,data='';
+  for(let pass=0;pass<12;pass++){
+    const scale=Math.min(1,limit/Math.max(image.naturalWidth,image.naturalHeight));
+    const canvas=document.createElement('canvas');
+    canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));
+    canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+    canvas.getContext('2d',{alpha:false}).drawImage(image,0,0,canvas.width,canvas.height);
+    data=canvas.toDataURL('image/jpeg',quality);
+    if(data.length<=9_000_000)break;
+    if(quality>.76)quality-=.08;
+    else{limit=Math.floor(limit*.78);quality=.83;}
+  }
+  if(!data||data.length>9_000_000)throw Error('Photo could not be safely resized.');
+  return data;
+}
+
+$('photoInput').addEventListener('change', async e=>{
+  const files=Array.from(e.target.files||[]);
+  e.target.value='';
+  if(!files.length)return;
+  if(files.length>10){$('photoHelp').textContent='Please select 10 or fewer pictures at a time.';return;}
+  if(savingPhoto)return;
+  savingPhoto=true;
+  $('saveFound').style.display='none';
+  const failures=[];let saved=0;
+  const where=whereVal('locationInput');
+  const button=$('saveFound');button.disabled=true;
+  for(let i=0;i<files.length;i++){
+    const f=files[i];
+    $('photoHeader').textContent=`Saving ${i+1} of ${files.length}: ${f.name}`;
+    $('photoHelp').textContent='Pictures are being saved locally. Gemini recognition will run automatically.';
+    try{
+      const picture=await prepareGeminiPhoto(f);
+      const uploadId='photo-'+Date.now().toString(36)+'-'+i+'-'+Math.random().toString(36).slice(2,12);
+      const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),45000);
+      try{
+        const resp=await fetch('/api/found',{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({where,photo:picture,upload_id:uploadId,...tripVals('pf')}),signal:ctrl.signal
+        });
+        const result=await resp.json();
+        if(!resp.ok)throw Error(result.error||'Photo upload rejected');
+        saved++;
+      }finally{clearTimeout(timer)}
+    }catch(ex){failures.push(f.name+': '+(ex.message||'Upload failed'))}
+  }
+  savingPhoto=false;button.disabled=false;
+  closeModal();await reloadRecords(true);go('found');
+  notify(`${saved} of ${files.length} photos saved. Gemini is identifying them automatically.`);
+  if(failures.length)alert('These files were not saved:\n'+failures.join('\n'));
+});
+async function uploadPhotoAutomatically(){
+  if(!photoData||savingPhoto)return;
+  savingPhoto=true;
+  const button=$('saveFound');button.disabled=true;
+  $('photoHeader').textContent='Saving photo…';
+  $('photoHelp').textContent='Your photo is saved before AI recognition begins.';
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),45000);
+  try{
+    const response=await fetch('/api/found',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({where:whereVal('locationInput'),photo:photoData,upload_id:selectedUploadId,...tripVals('pf')}),
+      signal:controller.signal
+    });
+    const result=await response.json();
+    if(!response.ok)throw Error(result.error||'Upload was not accepted');
+    closeModal();await reloadRecords(true);go('found');
+    notify(result.already_saved?'This photo was already saved.':'Photo saved. Recognition will run in the background.');
+  }catch(ex){
+    $('photoHeader').textContent='Upload did not finish';
+    $('photoHelp').textContent=(ex.name==='AbortError'?'The program took too long to reply. Click Retry upload.':ex.message)+' Your selected photo is still here.';
+    button.textContent='Retry upload';button.style.display='';
+  }finally{clearTimeout(timer);savingPhoto=false;button.disabled=false;}
+}
+$('saveFound').addEventListener('click',uploadPhotoAutomatically);
+// Refresh often while the local model analyzes a new image; preserve the form while open.
+setInterval(()=>{if(found.some(f=>['analyzing','waiting'].includes(f.recognition_state))&&!$('editWrap').classList.contains('open')&&!$('modalWrap').classList.contains('open'))reloadRecords(true)},3500);
+// Offer a visible way to restore hidden lost entries without modifying the original records.
+const originalLostTable=lostTable;
+lostTable=()=>originalLostTable().replace('Customer lost reports</h2>',
+  'Customer lost reports</h2><div class="panel-note">'+hiddenLost.size+' hidden in trial · <button type="button" class="mini" data-restore-hidden="1">Restore hidden rows</button></div>');
+function _memo(fn){const m=new Map();return v=>{const k=String(v);if(!m.has(k))m.set(k,fn(v));return m.get(k)}}
+cleanMatchText=_memo(cleanMatchText);classifyMatchItem=_memo(classifyMatchItem);generalMatchWords=_memo(generalMatchWords);
+document.addEventListener('change',async e=>{
+  if(e.target.matches&&e.target.matches('select.wheresel')){
+    const oth=e.target.id?$(e.target.id+'Other'):null;if(oth){oth.hidden=e.target.value!=='Other';if(!oth.hidden)oth.focus();return}
+    if(e.target.dataset.foundwhere){let v=e.target.value;if(v==='__other'){v=(prompt('Where was it found? (type it)')||'').trim();if(!v){reloadRecords(false);return}}
+      try{await api('/api/found-where',{id:e.target.dataset.foundwhere,where:v});await reloadRecords(true);notify('Found-at saved.')}catch(ex){alert(ex.message)}return}}
+  const s=e.target.closest&&e.target.closest('[data-vmstatus]');
+  if(s){const vm=s.dataset.vmstatus;
+    const v=s.value,body=v==='notfound'?{vm,status:'lost',nf:'yes'}:v==='lost'?{vm,status:'lost',nf:'no'}:{vm,status:'found',nf:''};
+    try{await api('/api/lost-meta',body);const m=(lostMeta[vm]=lostMeta[vm]||{});m.status=body.status;m.nf=body.nf;render();notify('Status saved.');}catch(ex){alert(ex.message)}return}
+  if(e.target.matches&&e.target.matches('[data-contactemail]')){try{await api('/api/lost-meta',{vm:contactVm,email:e.target.value.trim()});(lostMeta[contactVm]=lostMeta[contactVm]||{}).email=e.target.value.trim();refreshContact();notify('Email saved.')}catch(ex){alert(ex.message)}return}
+  if(e.target.matches&&e.target.matches('[data-contactnote]')){try{await api('/api/lost-meta',{vm:contactVm,note:e.target.value.trim()});(lostMeta[contactVm]=lostMeta[contactVm]||{}).note=e.target.value.trim();notify('Note saved.')}catch(ex){alert(ex.message)}return}
+  const tp=e.target.closest&&e.target.closest('[data-trip]');
+  if(tp){const vm=tp.dataset.vm,f=tp.dataset.trip;try{await api('/api/lost-meta',{vm,[f]:tp.value.trim()});(lostMeta[vm]=lostMeta[vm]||{})[f]=tp.value.trim();notify('Saved.')}catch(ex){alert(ex.message)}return}
+  const b=e.target.closest&&e.target.closest('[data-bus]');
+  if(b){const vm=b.dataset.bus;try{await api('/api/lost-meta',{vm,bus:b.value.trim()});(lostMeta[vm]=lostMeta[vm]||{}).bus=b.value.trim();notify('Bus number saved.');}catch(ex){alert(ex.message)}}
+});
+
+(function(){const st=document.createElement('style');st.textContent='.topnav{gap:2px!important}.topnav .navbtn{padding:9px 10px!important;font-size:14px!important;white-space:nowrap}.topsearch{width:min(220px,100%)!important}.topnavbar{gap:12px!important;padding:12px 18px!important}.topnav{flex:1 1 auto!important}a.phonecall{color:inherit;text-decoration:none;border-bottom:1px dashed #9aa9b6}a.phonecall:hover{color:#0b6bcb}tr.rd-open td{background:#fff6f6}tr.rd-open td:first-child{box-shadow:inset 3px 0 0 #e5675c}tr.rd-unsure td{background:#fffaf0}tr.rd-unsure td:first-child{box-shadow:inset 3px 0 0 #e3b341}tr.rd-done td{background:#f6fbf7}tr.rd-done td:first-child{box-shadow:inset 3px 0 0 #6fbf8b}.replyseg{display:inline-flex;margin-top:8px;border:1px solid #d8e0e7;border-radius:999px;overflow:hidden;background:#fff}.rs{border:0;background:transparent;color:#6b7c8a;font:600 12px inherit;padding:5px 10px;cursor:pointer;white-space:nowrap}.rs+.rs{border-left:1px solid #e6ecf1}.rs:hover{background:#f3f6f9}.rs.no.on{background:#fde8e6;color:#b42318}.rs.mid.on{background:#fdf1d6;color:#8a5a00}.rs.yes.on{background:#e1f4e8;color:#1b7a43}.statussel{padding:7px 9px;border-radius:8px;border:1px solid #c9d4de;font-weight:600;background:#fff}.busin{width:90px;padding:6px 8px;border-radius:8px;border:1px solid #c9d4de}.cand-row{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #e3eaf0}.cand-pic{width:64px;flex:0 0 64px}.cand-pic .previewpic{width:64px;height:64px}.cand-text{flex:1;min-width:0;overflow-wrap:anywhere}';document.head.appendChild(st)})();
+reloadRecords();
+setInterval(()=>{if(!$('modalWrap').classList.contains('open')&&!document.querySelector('#matchWrap.open,#textWrap.open,#contactWrap.open,#lostWrap.open')&&!/^(INPUT|SELECT)$/.test((document.activeElement||{}).tagName))reloadRecords(true);},45000);
+
+</script></body></html>

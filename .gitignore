@@ -1,0 +1,30 @@
+# Secrets
+.env
+*.env
+secrets.env
+Monsey_Private/
+# Customer and voicemail data (names, phone numbers, photos, recordings)
+trial_data/
+*.sqlite3
+voicemail_messages.json
+voicemail_items.json
+voicemail_trips.json
+transcripts*.txt
+*.mp3
+*.wav
+*.m4a
+voicemails.html
+voicemail_messages.html
+lost_found_items.html
+# Backups and junk
+Old_Backups/
+*_before_*
+*- Copy*
+*(1)*
+__pycache__/
+*.pyc
+gemini_test_results.txt
+gemini_api_key.txt
+.venv/
+*.log
+reference_bank/
