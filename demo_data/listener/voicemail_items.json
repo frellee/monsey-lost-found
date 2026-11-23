@@ -1,0 +1,34 @@
+{
+ "sample1.mp3": [
+  {
+   "item": "umbrella",
+   "color": "red"
+  },
+  {
+   "item": "wallet",
+   "color": "black"
+  }
+ ],
+ "sample2.mp3": [
+  {
+   "item": "tefillin",
+   "color": ""
+  }
+ ],
+ "sample3.mp3": [
+  {
+   "item": "backpack",
+   "color": "blue"
+  },
+  {
+   "item": "earbuds",
+   "color": "white"
+  }
+ ],
+ "sample4.mp3": [
+  {
+   "item": "scarf",
+   "color": "green"
+  }
+ ]
+}
