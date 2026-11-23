@@ -32,5 +32,8 @@ A small local system for a bus company's lost-and-found:
 ## Review notes
 Please review: UI/UX, performance with a few hundred records, security (the dashboard currently has no login and is meant for one trusted computer), and the best low-cost hosting option. A planned next step is hosting it on a small always-on server with per-user logins.
 
-## Not included yet
-Helper files that the listener imports and the Windows start scripts are not in this first upload and will be added: `yiddish_bridge.py`, `intermedia_dualtext.py`, `heimish_mixed_language.py`, `heimish_english_words.json`, `requirements.txt`, `START_*.bat`. Some of the older local-model helpers in `photo_dashboard/` may be slightly older than the versions in daily use; the photo recognition that runs today is `gemini_vision.py`.
+## Notes for the reviewer
+- `photo_dashboard/` is the dashboard + photo side; `voicemail_listener/` is the Gmail/Gemini voicemail side. On the real computer they live in two separate folders and share data through the folder named in `MONSEY_LISTENER_FOLDER`.
+- `start_windows.bat` / `START_*.bat` are the Windows launchers. `START_ALL_SAFE.bat` (loads the private secrets file, not included) is intentionally left out.
+- Photo recognition used in daily operation is `gemini_vision.py`. The other helpers (`auto_vision.py`, `second_opinion.py`, `reference_gallery.py`, `catalogue_search.py`, `learn_public_photos.py`) are the older local-model path; `requirements.txt` lists only the voicemail side (python-dotenv, faster-whisper, winotify); the dashboard side needs Pillow and, for the old local path, numpy/torch/transformers.
+- Real keys, the Gmail App Password and all customer data are excluded on purpose.

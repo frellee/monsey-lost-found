@@ -1,0 +1,1097 @@
+{
+  "version": 1,
+  "purpose": "Convert confirmed phonetic English borrowings inside Yiddish transcripts to Latin script; do not translate native Yiddish words.",
+  "source": "Original hand-curated vocabulary, not copied corpus text.",
+  "entries": [
+    {
+      "english": "iPad",
+      "heard_as": [
+        "אייפאד",
+        "אייפעד",
+        "אייפעט",
+        "אייפד",
+        "איי פאד",
+        "איי פעד",
+        "אײַפּאַד",
+        "אייפּאַד"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "AirPods",
+      "heard_as": [
+        "איירפאדס",
+        "איירפודס",
+        "אירפאדס",
+        "אערפאדס",
+        "ערפאדס",
+        "אירפודס",
+        "אייר פּאדס",
+        "אייר פּודס",
+        "איירפּאָדס"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "AirPod",
+      "heard_as": [
+        "איירפאד",
+        "איירפוד",
+        "אירפאד",
+        "אייר פּאד",
+        "איירפּאָד"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "iPhone",
+      "heard_as": [
+        "אייפון",
+        "אייפאון",
+        "איי פאון",
+        "אייפאָון",
+        "אייפּאָון"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Android",
+      "heard_as": [
+        "ענדרויד",
+        "אַנדרויד",
+        "אנדרויד"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Samsung",
+      "heard_as": [
+        "סעמסונג",
+        "סאַמסונג",
+        "סמסונג"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "laptop",
+      "heard_as": [
+        "לעפטאפ",
+        "לאפטאפ",
+        "לעפטאָפּ",
+        "לאַפּטאַפּ"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "computer",
+      "heard_as": [
+        "קאמפיוטער",
+        "קאָמפּיוטער",
+        "קאמפיוטר"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "tablet",
+      "heard_as": [
+        "טאבלעט",
+        "טעבלעט",
+        "טאַבלעט"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "charger",
+      "heard_as": [
+        "טשארדזשער",
+        "טשאַרדזשער",
+        "טשארגער"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "charging cable",
+      "heard_as": [
+        "טשארדזשינג קעיבל",
+        "טשאַרדזשינג קעיבל",
+        "טשארדזשינג קעבל"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "cable",
+      "heard_as": [
+        "קעיבל",
+        "קעבל",
+        "קייבל"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "USB",
+      "heard_as": [
+        "יו עס בי",
+        "יועסבי",
+        "יו עס בּי"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "USB-C",
+      "heard_as": [
+        "יו עס בי סי",
+        "יועסבי סי"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "power bank",
+      "heard_as": [
+        "פאוער בענק",
+        "פאווער בענק",
+        "פּאַוער בענק"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "headphones",
+      "heard_as": [
+        "העדפאונס",
+        "העדפאָונס",
+        "העדפאנס"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "earbuds",
+      "heard_as": [
+        "אירבאדס",
+        "ערבאדס",
+        "עירבאדס"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Bluetooth",
+      "heard_as": [
+        "בלוטוט",
+        "בלוטוס",
+        "בלוּטוּת"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "case",
+      "heard_as": [
+        "קעיס",
+        "קייס"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "cover",
+      "heard_as": [
+        "קאווער",
+        "קאָווער",
+        "קאבער"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "plastic",
+      "heard_as": [
+        "פלאסטיק",
+        "פּלאַסטיק",
+        "פּלסטיק"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "plastic cover",
+      "heard_as": [
+        "פלאסטיק קאווער",
+        "פּלאַסטיק קאָווער",
+        "פלאסטיק קאוור"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "plastic case",
+      "heard_as": [
+        "פלאסטיק קעיס",
+        "פּלאַסטיק קייס"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "screen",
+      "heard_as": [
+        "סקרין",
+        "סקריען"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "keyboard",
+      "heard_as": [
+        "קיבארד",
+        "קיבאָרד",
+        "קיבאורד"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "mouse",
+      "heard_as": [
+        "מאוס",
+        "מאַוס"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "camera",
+      "heard_as": [
+        "קאמערא",
+        "קאַמעראַ"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "smartwatch",
+      "heard_as": [
+        "סמארטוואטש",
+        "סמארט וואטש"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Apple Watch",
+      "heard_as": [
+        "עפל וואטש",
+        "עפּל וואַטש"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "cell phone",
+      "heard_as": [
+        "סעל פאון",
+        "סעלפאון",
+        "סעל פאָון"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "phone",
+      "heard_as": [
+        "פאון",
+        "פאָון"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "phone number",
+      "heard_as": [
+        "פאון נאמבער",
+        "פאון נומבער",
+        "פאָון נאַמבער"
+      ],
+      "category": "Devices",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "carriage",
+      "heard_as": [
+        "קערידזש",
+        "קערידש",
+        "קערעדזש",
+        "קארידזש",
+        "קארידש",
+        "קאַרידזש"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "baby carriage",
+      "heard_as": [
+        "בעיבי קערידזש",
+        "בעיבי קארידזש",
+        "בייבי קערידזש"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "stroller",
+      "heard_as": [
+        "סטראלער",
+        "סטראָלער"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "car seat",
+      "heard_as": [
+        "קאר סיט",
+        "קאר סיעט",
+        "קאַר סיט"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "booster seat",
+      "heard_as": [
+        "בוסטער סיט",
+        "בוסטער סיעט"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "wallet",
+      "heard_as": [
+        "וואלעט",
+        "וואָלעט",
+        "וואלט"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "purse",
+      "heard_as": [
+        "פארס",
+        "פּערס",
+        "פערס"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "bag",
+      "heard_as": [
+        "בעג",
+        "באַג"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "backpack",
+      "heard_as": [
+        "בעקפעק",
+        "בעקפאק",
+        "בעק פּעק",
+        "בעקפּאַק"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "shopping bag",
+      "heard_as": [
+        "שאפינג בעג",
+        "שאַפּינג באַג",
+        "שאפינג באג"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "plastic bag",
+      "heard_as": [
+        "פלאסטיק בעג",
+        "פּלאַסטיק באַג",
+        "פלאסטיק באג"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "luggage",
+      "heard_as": [
+        "לאגעדזש",
+        "לאַגידזש",
+        "לאגידזש"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "suitcase",
+      "heard_as": [
+        "סוטקעיס",
+        "סוטקייס",
+        "סוּטקייס"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "briefcase",
+      "heard_as": [
+        "בריפקעיס",
+        "בריף קעיס",
+        "בריף קייס"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "package",
+      "heard_as": [
+        "פעקעדזש",
+        "פּעקעדזש",
+        "פאקעדזש"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "envelope",
+      "heard_as": [
+        "ענוועלאפ",
+        "ענוועלאָפּ",
+        "ענוועלאופ"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "bottle",
+      "heard_as": [
+        "באטל",
+        "באָטל"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "water bottle",
+      "heard_as": [
+        "וואסער באטל",
+        "וואטער באטל",
+        "וואטער באָטל"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "lunch box",
+      "heard_as": [
+        "לאנטש באקס",
+        "לאָנטש באָקס",
+        "לאנטשבאקס"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "toy",
+      "heard_as": [
+        "טוי",
+        "טאָי"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "blanket",
+      "heard_as": [
+        "בלענקעט",
+        "בלענקיט"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "pillow",
+      "heard_as": [
+        "פילאו",
+        "פּילאָו"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "towel",
+      "heard_as": [
+        "טאועל",
+        "טאַול"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "keys",
+      "heard_as": [
+        "קיס",
+        "קיעס",
+        "קיעז"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "keychain",
+      "heard_as": [
+        "קיטשעין",
+        "קי טשעין",
+        "קי טשיין"
+      ],
+      "category": "Bags and belongings",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "jacket",
+      "heard_as": [
+        "דזשעקעט",
+        "דזשעקט",
+        "דזשאַקעט"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "coat",
+      "heard_as": [
+        "קאוט",
+        "קאָוט"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "sweater",
+      "heard_as": [
+        "סוועטער",
+        "סװעטער"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "hoodie",
+      "heard_as": [
+        "הודי",
+        "הודיע",
+        "הוּדי"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "sneakers",
+      "heard_as": [
+        "סניקערס",
+        "סניקערז",
+        "סניקערעס"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "shoes",
+      "heard_as": [
+        "שוז",
+        "שוּז"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "socks",
+      "heard_as": [
+        "סאקס",
+        "סאָקס"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "glasses",
+      "heard_as": [
+        "גלעסעס",
+        "גלאסעס",
+        "גלאַסעס"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "sunglasses",
+      "heard_as": [
+        "סאנגלאַסעס",
+        "סאנ גלאסעס",
+        "סאנגלסעס"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "watch",
+      "heard_as": [
+        "וואטש",
+        "וואַטש"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "ring",
+      "heard_as": [
+        "רינג"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "bracelet",
+      "heard_as": [
+        "ברעיסלעט",
+        "ברייסלעט",
+        "ברעסלעט"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "necklace",
+      "heard_as": [
+        "נעקלעס",
+        "נעקלעיס",
+        "נעקלאס"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "earrings",
+      "heard_as": [
+        "איררינגס",
+        "איררינגען",
+        "איר רינגס"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "jewelry",
+      "heard_as": [
+        "דזשולערי",
+        "דזשולרי",
+        "דזשועלרי",
+        "דזשועולרי",
+        "דזשעוועלרי",
+        "דזשוועלרי",
+        "דזשולארי"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "diamond",
+      "heard_as": [
+        "דיימאנט",
+        "דיימענד",
+        "דייַמענד"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "chain",
+      "heard_as": [
+        "טשעין",
+        "טשיין"
+      ],
+      "category": "Clothing and accessories",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "credit card",
+      "heard_as": [
+        "קרעדיט קארד",
+        "קרעדיט קאַרד",
+        "קרעדיטקארד"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "debit card",
+      "heard_as": [
+        "דעביט קארד",
+        "דעביט קאַרד"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "ID card",
+      "heard_as": [
+        "איי די קארד",
+        "איי די קאַרד",
+        "איידי קארד"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "driver license",
+      "heard_as": [
+        "דרייווער לייסענס",
+        "דרייווער לייסנס",
+        "דרייווער לייסענץ"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "passport",
+      "heard_as": [
+        "פאספארט",
+        "פאַספּאָרט"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "cash",
+      "heard_as": [
+        "קעש",
+        "קאַש"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "dollars",
+      "heard_as": [
+        "דאלערס",
+        "דאָלערס"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "receipt",
+      "heard_as": [
+        "רעסיט",
+        "ריסיט",
+        "רעסיפּט"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "checkbook",
+      "heard_as": [
+        "טשעקבוק",
+        "טשעק בוק"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "gift card",
+      "heard_as": [
+        "גיפט קארד",
+        "גיפט קאַרד"
+      ],
+      "category": "Documents and money",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "bus",
+      "heard_as": [
+        "באס",
+        "באַס"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "bus stop",
+      "heard_as": [
+        "באס סטאפ",
+        "באַס סטאָפּ",
+        "באס סטאפּ"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "bus driver",
+      "heard_as": [
+        "באס דרייווער",
+        "באַס דרייווער"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "driver",
+      "heard_as": [
+        "דרייווער",
+        "דרייבער"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "ticket",
+      "heard_as": [
+        "טיקעט",
+        "טיקיט"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "transfer",
+      "heard_as": [
+        "טרענספער",
+        "טראַנספֿער"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "shuttle",
+      "heard_as": [
+        "שאטל",
+        "שאַקל",
+        "שאַאָטל"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "express",
+      "heard_as": [
+        "עקספרעס",
+        "עקספּרעס"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "office",
+      "heard_as": [
+        "אפיס",
+        "אָפיס"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "dispatcher",
+      "heard_as": [
+        "דיספעטשער",
+        "דיספּעטשער"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "route",
+      "heard_as": [
+        "רוט",
+        "רוּט"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "front seat",
+      "heard_as": [
+        "פראנט סיט",
+        "פֿראַנט סיט"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "back seat",
+      "heard_as": [
+        "בעק סיט",
+        "באַק סיט"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "seat",
+      "heard_as": [
+        "סיט",
+        "סיעט"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "trunk",
+      "heard_as": [
+        "טראנק",
+        "טראָנק"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "lost and found",
+      "heard_as": [
+        "לאסט ענד פאונד",
+        "לאָסט ענד פֿאַונד"
+      ],
+      "category": "Bus travel",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Monsey",
+      "heard_as": [
+        "מאנסי",
+        "מאָנסי"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Boro Park",
+      "heard_as": [
+        "בארא פארק",
+        "באָרא פארק",
+        "בארא פּאַרק"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Brooklyn",
+      "heard_as": [
+        "ברוקלין",
+        "ברוקלען"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Williamsburg",
+      "heard_as": [
+        "וויליאמסבורג",
+        "וויליאַמסבורג"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Flatbush",
+      "heard_as": [
+        "פלעטבוש",
+        "פלעטבּוש"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Lakewood",
+      "heard_as": [
+        "לעיקוואוד",
+        "לעקוואוד",
+        "לייקוואוד"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Monroe",
+      "heard_as": [
+        "מאנרא",
+        "מאנראָ",
+        "מאנראו"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Spring Valley",
+      "heard_as": [
+        "ספרינג וואלי",
+        "ספרינג וואַלי"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "New Square",
+      "heard_as": [
+        "ניו סקווער",
+        "ניו סקוואַר"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Queens",
+      "heard_as": [
+        "קווינס",
+        "קװינס"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Manhattan",
+      "heard_as": [
+        "מנהעטן",
+        "מענהעטען"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    },
+    {
+      "english": "Bronx",
+      "heard_as": [
+        "בראנקס",
+        "בראָנקס"
+      ],
+      "category": "Place names",
+      "note": "Curated phonetic spelling examples; not audio-trained"
+    }
+  ]
+}

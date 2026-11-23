@@ -1,0 +1,36 @@
+FREE INTERMEDIA VOICEMAIL LISTENER - WINDOWS
+
+This is the NEW free version. Do not use the old Google Cloud/OpenAI API program.
+
+STEP 1: Install Python 3.11 or newer from https://www.python.org/downloads/windows/
+Check "Add Python to PATH" if offered during installation.
+
+STEP 2: Gmail needs IMAP access and an App Password.
+Open https://myaccount.google.com/apppasswords while signed in to the Gmail account receiving Intermedia voicemails.
+Google generally requires 2-Step Verification to create App Passwords. If the option is missing, your account or organization may restrict it; some accounts cannot use this method.
+Do not turn off account security or share your password. This is a 16-character APP PASSWORD, NOT your regular Gmail password.
+
+STEP 3: Copy .env.example and rename the copy .env (Windows may hide the extension).
+Right-click .env and open in Notepad. Replace:
+GMAIL_ADDRESS=youraddress@gmail.com
+GMAIL_APP_PASSWORD=your_16_character_app_password
+with your Gmail address and the new App Password. Save the file.
+Do not send your .env or App Password to ChatGPT or anyone else.
+
+STEP 4: Double-click start_windows.bat.
+The first run installs free software and downloads a local speech recognition model. It may take several minutes and requires internet access. After that, transcription runs locally on your PC.
+Keep the black window open and your PC awake to monitor emails.
+
+STEP 5: Read transcripts.txt in Notepad to see results. A Windows alert appears for possible lost-item messages.
+
+NOTES:
+- No Google Cloud project or OpenAI API key needed; no transcription service charges.
+- Your Gmail account must allow IMAP access and App Passwords.
+- The program reads messages but does not delete or send them.
+- The default search is limited to the most recent 20 emails from the Intermedia sender, and it checks every 60 seconds.
+- The keyword alert is a starter filter and may miss some calls or create false alarms. Transcription of Yiddish/Hebrew may be imperfect.
+- Keep your computer on. This is not a cloud service.
+- All recordings are downloaded temporarily and deleted after transcription. Transcripts and local credentials stay in this folder; protect it.
+- Windows Defender Firewall or antivirus may prompt for permission for Python; use your own security judgment.
+- Local model download and Python packages are free, but your internet/electricity costs still apply.
+- This version has not been tested against your actual Gmail account.
