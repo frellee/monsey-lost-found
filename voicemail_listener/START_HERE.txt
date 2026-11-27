@@ -27,7 +27,9 @@ NOTES:
 - No Google Cloud project or OpenAI API key needed; no transcription service charges.
 - Your Gmail account must allow IMAP access and App Passwords.
 - The program reads messages but does not delete or send them.
-- The default search is limited to the most recent 20 emails from the Intermedia sender, and it checks every 60 seconds.
+- The listener checks Intermedia emails every 60 seconds by default.
+- Optional .env setting LOOKBACK_DAYS=14 controls how many calendar days back the listener searches. Increase it to cover a longer outage.
+- While the listener has no completed voicemails in its database, it selects up to the newest FIRST_RUN_LIMIT emails (default 20) within that window. Once a voicemail is saved, it processes all remaining emails in the window, oldest first.
 - The keyword alert is a starter filter and may miss some calls or create false alarms. Transcription of Yiddish/Hebrew may be imperfect.
 - Keep your computer on. This is not a cloud service.
 - All recordings are downloaded temporarily and deleted after transcription. Transcripts and local credentials stay in this folder; protect it.

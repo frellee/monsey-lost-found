@@ -13,6 +13,8 @@ A small local system for a bus company's lost-and-found:
 - `MONSEY_GEMINI_API_KEY` - Gemini API key
 - `GMAIL_ADDRESS`, `GMAIL_APP_PASSWORD` - mailbox that receives voicemails
 - `MONSEY_LISTENER_FOLDER` - folder holding the listener output files
+- `LOOKBACK_DAYS` - how many calendar days back the listener searches for Intermedia emails (default `14`, including the cutoff date)
+- `FIRST_RUN_LIMIT` - maximum number of newest emails selected per poll while the listener's `done` table is empty (default `20`). Once a voicemail is saved, the listener works through the full lookback window, oldest first.
 
 ## How to run (Windows, local)
 `START_ALL_MONSEY_TRAILS.bat` starts the listener and the dashboard. The dashboard opens at a random local port on `127.0.0.1`.

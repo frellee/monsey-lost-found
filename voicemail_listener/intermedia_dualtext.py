@@ -14,6 +14,9 @@ from pathlib import Path
 import re
 
 
+HTML_MESSAGE_LIMIT = 500
+
+
 class _HTMLToText(HTMLParser):
     def __init__(self):
         super().__init__()
@@ -131,24 +134,31 @@ def _review(audio_text: str, provider: str, lang: str, subject: str):
 
 def record_and_render(root: Path, stamp: str, subject: str, filename: str,
                       transcript: str, flagged: bool, language: str,
-                      provider_text: str = '', raw_transcript: str = '') -> None:
+                      provider_text: str = '', raw_transcript: str = '',
+                      uid: str = '') -> None:
     root = Path(root)
     data_path = root / 'voicemail_messages.json'
     page_path = root / 'voicemail_messages.html'
     try:
-        records = json.loads(data_path.read_text(encoding='utf-8')) if data_path.exists() else []
-        if not isinstance(records, list):
-            records = []
-    except (OSError, ValueError):
+        records = json.loads(data_path.read_text(encoding='utf-8-sig'))
+    except FileNotFoundError:
         records = []
+    if not isinstance(records, list):
+        raise ValueError('Unexpected voicemail_messages.json format')
+    # A retry after the JSON write can still refresh the page without adding a second report.
+    if uid and any(isinstance(record, dict) and record.get('uid') == uid
+                   and record.get('filename') == filename for record in records):
+        _render(page_path, records)
+        return
     phone, phone_label, caller_id, score, notes = _review(transcript, provider_text, language, subject)
     entry = dict(date=stamp, subject=subject, filename=filename, transcript=transcript,
                  flagged=flagged, language=language, phone=phone, phone_label=phone_label,
                  caller_id=caller_id, provider_transcript=provider_text, original_audio_transcript=raw_transcript,
                  agreement=score, review_notes=notes)
-    # Keep existing records unmodified; do not overwrite any previous voicemail.
+    if uid:
+        entry['uid'] = uid
+    # Preserve the full history in JSON. Only the generated HTML limits its display.
     records.insert(0, entry)
-    records = records[:500]
     new_json = json.dumps(records, ensure_ascii=False, indent=2)
     _atomic_write(data_path, new_json)
     _render(page_path, records)
@@ -170,7 +180,9 @@ def _atomic_write(target: Path, value: str):
 def _render(path: Path, records: list[dict]):
     esc = lambda value: escape(str(value or ''), quote=True)
     cards = []
-    for e in records:
+    for e in records[:HTML_MESSAGE_LIMIT]:
+        if not isinstance(e, dict):
+            continue
         lang = e.get('language', 'unknown')
         direction = 'rtl' if lang in ('yi', 'he') else 'ltr'
         status = 'Possible lost & found' if e.get('flagged') else 'Other voicemail'
@@ -229,4 +241,4 @@ def refresh_existing_dashboard(root: Path) -> None:
         records = json.loads(data_path.read_text(encoding='utf-8'))
         if not isinstance(records, list):
             raise ValueError('Unexpected voicemail_messages.json format')
-        _render(root / 'voicemail_messages.html', records[:500])
+        _render(root / 'voicemail_messages.html', records)

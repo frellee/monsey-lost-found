@@ -138,7 +138,7 @@ def load_entries():
         try:
             obj=json.loads(path.read_text(encoding='utf-8-sig'))
             if isinstance(obj,list):
-                return [x for x in obj if isinstance(x,dict)][:600]
+                return [x for x in obj if isinstance(x,dict)]
         except (OSError, ValueError):
             pass
     # Read the existing non-destructive transcript history if JSON is missing.
@@ -154,7 +154,7 @@ def load_entries():
                 t=re.search(r'(?ms)^Transcript:\s*(.*?)(?=^---\s+|\Z)',chunk)
                 if f and t:
                     entries.append(dict(date=stamp,filename=f.group(1).strip(), transcript=t.group(1).strip()))
-            return entries[-600:][::-1]
+            return entries[::-1]
         except OSError:
             pass
     return []
@@ -224,7 +224,7 @@ def get_lost():
             'status':'New', 'filename':x.get('filename') or '',
             'trip':(lambda tr:{'bus':str(tr.get('bus') or ''),'time':str(tr.get('time') or ''),'from':str(tr.get('from') or ''),'to':str(tr.get('to') or '')})(trips.get(x.get('filename') or '') or guess_trip(text_by_file.get(x.get('filename') or '','')))
         })
-    return output[:1200],len(entries)
+    return output,len(entries)
 
 
 def response_state():

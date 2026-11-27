@@ -160,11 +160,11 @@ def transcribe_en_yiddish(audio_path: Path, whisper_model, vocabulary_hint: str 
                                   env=env, check=False)
             if proc.returncode != 0 or not output.is_file():
                 LOG.warning("Yiddish model failed; preserving original: %s",
-                            (proc.stderr or proc.stdout)[-400:])
+                            f'worker exit code {proc.returncode}')
                 return _common_english_spelling(from_source), raw, lang
             yiddish_raw = json.loads(output.read_text(encoding="utf-8"))["transcript"].strip()
         except (OSError, ValueError, KeyError, subprocess.TimeoutExpired) as ex:
-            LOG.warning("Yiddish model unavailable; preserving original: %s", ex)
+            LOG.warning("Yiddish model unavailable; preserving original: %s", type(ex).__name__)
             return _common_english_spelling(from_source), raw, lang
 
     if not _plausibly_yiddish(yiddish_raw):
